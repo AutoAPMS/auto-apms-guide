@@ -21,7 +21,7 @@ const vitePressSidebarOptions = {
 const vitePressOptions = {
     lang: 'en-US',
     title: 'AutoAPMS',
-    description: 'An open-source software framework for developing behavior-based robotic applications. Works with ROS 2 and PX4 Autopilot.',
+    description: 'A versatile software framework for developing robot behaviors using behavior trees fully integrated with ROS 2.',
     base: '/auto-apms-guide/',
 
     head: [
