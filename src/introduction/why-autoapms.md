@@ -41,10 +41,6 @@ These features frame a unified toolset for implementing behavior-based systems a
 
 ## What makes it special?
 
-This project combines the concepts introduced by multiple other repositories. From all related projects, [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP) is by far the most prominent one. This repo provides the core implementation of the behavior tree paradigm. However, when using it standalone, the application specific integration into the workspace is still up to the user. With AutoAPMS, all supported applications are building on ROS 2 which allows extending the behavior tree API to integrate well with `ament_cmake` and ROS's plugin system.
+Behavior trees have also been adopted for creating robotic applications by e.g. [Nav2 Behavior Tree](https://docs.nav2.org/behavior_trees/index.html). Compared to the `nav2_behavior_tree` package, AutoAPMS thinks behavior trees further. The entire project is dedicated to simplify behavior development and automates/standardizes most of the troublesome and error-prone manual development work.
 
-Behavior trees have also been adopted for creating robotic applications by [Nav2 Behavior Tree](https://docs.nav2.org/behavior_trees/index.html). Compared to the `nav2_behavior_tree` package, AutoAPMS thinks behavior trees further. The entire  project is dedicated to simplify behavior development and automates/standardizes most of the troublesome and error-prone manual development work.
-
-::: tip
-You may also include both Nav2's and AutoAPMS's packages in your workspace. In fact, Nav2 has plenty of useful features that AutoAPMS doesn't offer (the same goes for the other way around). It's important to understand that these two frameworks don't oppose but complement each other.
-:::
+This project wraps the functionality of [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP) and fully integrates it into the ROS 2 ecosystem in a lightweight manner. This way, we can leverage the advantages of behavior trees while keeping the overhead low. The core packages are written in C++ for performance reasons, but a supplementary Python API exposes high-level features for scripting.

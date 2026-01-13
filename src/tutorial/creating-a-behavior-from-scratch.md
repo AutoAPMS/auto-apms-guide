@@ -6,7 +6,7 @@ sidebar: "Walkthrough: Creating a Behavior From Scratch"
 
 In this tutorial we will implement and execute a simple behavior tree starting from scratch. By the end of it, you'll be familiar with every development step required for creating behaviors with AutoAPMS.
 
-The full source code of the following examples can be found in the GitHub repository inside the package [`auto_apms_examples`](https://github.com/autoapms/auto-apms/blob/master/auto_apms_examples).
+The full source code of the following examples can be found in the GitHub repository inside the package [`auto_apms_examples`](https://github.com/AutoAPMS/auto-apms/blob/master/auto_apms_examples).
 
 [[toc]]
 

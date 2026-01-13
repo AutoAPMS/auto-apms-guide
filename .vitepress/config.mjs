@@ -70,6 +70,8 @@ const vitePressOptions = {
         hostname: 'https://autoapms.github.io/auto-apms-guide/'
     },
 
+    appearance: 'dark',
+
     themeConfig: {
         // https://vitepress.dev/reference/default-theme-config
         siteTitle: 'AutoAPMS',
@@ -86,13 +88,13 @@ const vitePressOptions = {
         ],
 
         socialLinks: [
-            { icon: 'github', link: 'https://github.com/autoapms/auto-apms' }
+            { icon: 'github', link: 'https://github.com/AutoAPMS/auto-apms' }
         ],
 
         outline: [2, 3],
 
         editLink: {
-            pattern: 'https://github.com/autoapms/auto-apms-guide/blob/master/src/:path'
+            pattern: 'https://github.com/AutoAPMS/auto-apms-guide/blob/master/src/:path'
         },
         lastUpdated: {
             text: 'Last update',

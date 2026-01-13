@@ -5,6 +5,18 @@ order: 0
 
 Before starting with the tutorials you should make yourself familiar with the fundamental concepts. This page outlines the most important definitions and design decisions you need to know about.
 
+## Framework Design
+
+AutoAPMS adopts the behavior tree implementation provided by [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP) and embeds it into the ROS 2 ecosystem so that developers have a much easier time writing custom behaviors and distributing them in a ROS 2 workspace. **The goal is to make it significantly more user-friendly and less error prone to develop autonomous robotics with behavior trees**.
+
+The illustration below should give you an idea of how to apply the framework to your system and how to use it for creating custom applications.
+
+<div align="center">
+
+![AutoAPMS Framework Design](./autoapms-framework-design.svg)
+
+</div>
+
 ## Understanding Behaviors
 
 In robotics, the term *behavior* refers to the pattern of actions or responses carried out by an automated system to achieve a specific goal. Behaviors can be very simple (like avoiding obstacles) or complex (like following a person or coordinating with other robots). A popular paradigm widely used for designing such plans of action is the [behavior tree](./behavior-trees.md). Behavior trees are hierarchical structures that allow users to intuitively define missions by arranging simple building blocks and create arbitrarily complex applications using model-based programming. AutoAPMS adopts this paradigm and makes it a first class citizen for modeling behaviors.

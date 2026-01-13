@@ -19,7 +19,7 @@ hero:
       link: https://autoapms.github.io/auto-apms
     - theme: brand
       text: GitHub
-      link: https://github.com/autoapms/auto-apms
+      link: https://github.com/AutoAPMS/auto-apms
 
 features:
   - title: Leveraging modern ROS 2

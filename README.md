@@ -1,6 +1,6 @@
 # AutoAPMS User Guide
 
-![Deploy](https://github.com/autoapms/auto-apms-guide/actions/workflows/deploy.yml/badge.svg?branch=master)
+![Deploy](https://github.com/AutoAPMS/auto-apms-guide/actions/workflows/deploy.yml/badge.svg?branch=master)
 
 The docs are powered by [VitePress](https://vitepress.dev/). The website is deployed by a GitHub action on every push to the `master` branch.
 

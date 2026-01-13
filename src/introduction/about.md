@@ -1,19 +1,19 @@
 ---
 order: 0
 title: User Guide
-sidebar: About this Guide
+sidebar: About
 ---
-# User Guide for AutoAPMS
+# User Guide & Documentation
 
-[![Release](https://img.shields.io/github/v/release/autoapms/auto-apms?label=Release)](https://github.com/autoapms/auto-apms/releases)
+[![Release](https://img.shields.io/github/v/release/autoapms/auto-apms?label=Release)](https://github.com/AutoAPMS/auto-apms/releases)
 
 Welcome developers, engineers and ROS 2 enthusiasts! 🎉
 
 This is the official user guide and documentation for **AutoAPMS**: An *automated action planning and management system* for ROS 2.
 
-AutoAPMS is a **heavily extensible** development framework for **behavior-based ROS 2 applications**. It provides a **highly modular integration of behavior trees**, implements a **powerful execution engine** and offers **convenient CLI tooling** for deploying behaviors with ease.
+AutoAPMS is a **heavily extensible** development framework for **behavior-based ROS 2 applications**. It provides a **highly modular integration of behavior trees**, implements a **powerful execution engine** and offers **convenient CLI tooling** for deploying behaviors with ease. The core packages are written in C++ and a supplementary Python API exposes high-level features for scripting.
 
-The intention of this project is to make it significantly more user-friendly and less error prone to develop autonomous robotics with behavior trees. The core packages are written in C++ and a supplementary Python API exposes high-level features for scripting.
+## Explore the Documentation
 
 You want to know more about the features of this framework and how to get started? Check out the following pages:
 
@@ -41,10 +41,10 @@ This website hosts the "human-readable" documentation of the project. For all th
 
 ## Related Projects
 
-Aside from the core ROS 2 packages, AutoAPMS builds upon the following projects:
+AutoAPMS was inspired by the following projects:
 
-- [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP) by Davide Faconti
+- [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP)
 
-- [pyrobosim](https://github.com/sea-bass/pyrobosim) by Sebastian Castro
+- [BehaviorTree.ROS2](https://github.com/BehaviorTree/BehaviorTree.ROS2)
 
-Thanks for all the great work from the maintainers and contributors of these projects!
+Thanks for all the great work from the associated maintainers and contributors that made this project possible!
