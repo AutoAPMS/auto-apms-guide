@@ -59,7 +59,7 @@ If the executor has been started in detached mode (`attach` = false), this actio
 Stopping or halting the execution of a behavior tree works by invoking `BT::Tree::haltTree` on the respective object.
 
 ::: warning
-For `TreeExecutorNode` to be able to process `CommandTreeExecutor` action goals, all behavior tree nodes to be ticked must be implemented asynchronously. Make sure to read [this guide](https://www.behaviortree.dev/docs/guides/asynchronous_nodes#asynchronous-vs-synchronous) if you don't know what it means to "synchronously" or "asynchronously" execute a behavior tree.
+For `TreeExecutorNode` to be able to process `CommandTreeExecutor` action goals, all behavior tree nodes to be ticked must be implemented asynchronously. Make sure to read [this guide](https://www.behaviortree.dev/docs/guides/asynchronous_nodes/#asynchronous-vs-synchronous) if you don't know what it means to "synchronously" or "asynchronously" execute a behavior tree.
 :::
 
 #### Fields {#cmd-fields}
