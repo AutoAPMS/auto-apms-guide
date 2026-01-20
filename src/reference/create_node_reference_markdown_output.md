@@ -844,7 +844,7 @@
 
 | Output Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **value** | `long` | ❌ | Output port for the parameter's value. |
+| **value** | `int` | ❌ | Output port for the parameter's value. |
 
 ### GetParameterIntVec
 
@@ -867,7 +867,7 @@
 
 | Output Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **value** | `std::vector<long, std::allocator<long> >` | ❌ | Output port for the parameter's value. |
+| **value** | `std::vector<int, std::allocator<int> >` | ❌ | Output port for the parameter's value. |
 
 ### GetParameterString
 
@@ -1183,7 +1183,7 @@
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
-| **value** | `long` | ❌ | Value of the parameter to be set. |
+| **value** | `int` | ❌ | Value of the parameter to be set. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 
 ### SetParameterIntVec
@@ -1201,7 +1201,7 @@
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
-| **value** | `std::vector<long, std::allocator<long> >` | ❌ | Value of the parameter to be set. |
+| **value** | `std::vector<int, std::allocator<int> >` | ❌ | Value of the parameter to be set. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 
 ### SetParameterString
