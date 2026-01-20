@@ -68,7 +68,7 @@ Use this macro for introducing custom behavior definitions tailored to your spec
 ```cmake
 auto_apms_behavior_tree_register_behavior(<build_request>
   BUILD_HANDLER class_name
-  [CATEGORY category_name]
+  [CATEGORY category]
   [ALIAS alias]
   [ENTRYPOINT entrypoint]
   [NODE_MANIFEST node_manifest1 [node_manifest2 ...]]
@@ -108,14 +108,18 @@ It provides a standardized way of registering behavior tree resources and allows
 
 ```cmake
 auto_apms_behavior_tree_register_trees(<paths>...
+  [ALIAS_NAMESPACE alias_namespace]
   [NODE_MANIFEST node_manifest1 [node_manifest2 ...]]
+  [MARK_AS_INTERNAL]
 )
 ```
 
 | Argument | Required/Optional | Description |
 | :--- | :---: | :--- |
 | `paths` | Required (Positional) | Behavior tree XML files to be added to this package's resources. The user must pass at least one. |
+| `ALIAS_NAMESPACE` | Optional (Single-Value-Keyword) | Argument to customize the alias namespace used for all behavior trees to be registered. The default is to use the XML file stem as namspace. |
 | `NODE_MANIFEST` | Optional (Multi-Value-Keyword) | One or more relative paths (relative to `CMAKE_CURRENT_SOURCE_DIR`) or resource identities of existing node manifests. If specified, all associated behavior tree nodes can be loaded automatically thus are allowed to use in combination with the trees specified under `paths`. |
+| `MARK_AS_INTERNAL` | Optional (Option) | If this option is set, the behavior is assigned a special category which indicates it is intended for internal use only. |
 
 ### Example
 
