@@ -1279,7 +1279,7 @@
 | **executor** | `std::string` | ❌ | Name of the executor responsible for building and running the specified behavior tree. |
 | **build_request** | `std::string` | ❌ | String passed to the tree build handler defining which tree is to be built. |
 | **build_handler** | `std::string` |  | Fully qualified class name of the build handler that is supposed to take care of the request. If empty, use the current one. |
-| **entrypoint** | `std::string` |  | Entrypoint for the behavior. If empty, let the build handler determine the entrypoint. |
+| **entry_point** | `std::string` |  | Entrypoint for the behavior. If empty, let the build handler determine the entry point. |
 | **node_manifest** | `std::string` |  | YAML/JSON formatted string encoding the name and the registration options for the tree nodes supposed to be loaded before building the tree. |
 | **clear_blackboard** | `bool` | true | Boolean flag wether to clear the existing blackboard entries before the execution starts or not. |
 | **attach** | `bool` | true | Boolean flag wether to attach to the execution process or start in detached mode. |

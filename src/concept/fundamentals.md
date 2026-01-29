@@ -27,7 +27,7 @@ For communicating behaviors with robots, we introduce a rather abstract but flex
 
 1. A behavior **build handler** that knows the schema the build request is encoded in and builds the behavior tree accordingly
 
-1. *Optional:* An **entrypoint** that specifies the root of the behavior tree
+1. *Optional:* An **entry point** that specifies the root of the behavior tree
 
 1. *Optional:* A **node manifest** that maps the behavior's building blocks with the correct plugins
 
@@ -35,7 +35,7 @@ For communicating behaviors with robots, we introduce a rather abstract but flex
 
 The standard way of defining behaviors is using an [XML schema](https://www.behaviortree.dev/docs/learn-the-basics/xml_format) that explicitly states the relation between each individual behavior tree node. In this case, the corresponding build handler can directly create the tree by parsing the build request (formatted XML string) using the [`TreeDocument`](https://autoapms.github.io/auto-apms/classauto__apms__behavior__tree_1_1core_1_1TreeDocument.html) class that encapsulates the C++ behavior tree building functionality. This workflow can be adopted by using one of the [commonly used behavior build handlers](./common-resources.md#behavior-build-handlers) that are available out of the box. If you would like to introduce custom behavior tree building algorithms, you can [implement your own build handlers](../tutorial/building-behavior-trees.md#using-treebuildhandler).
 
-The combination of a build request, a build handler and optionally an entrypoint and a node manifest is considered a single behavior. Altogether, they uniquely define the pattern of actions for a robotic system. Typically, they should be installed as resources in your ROS 2 workspace using the CMake macro [`auto_apms_behavior_tree_register_behavior`](../reference/cmake.md#register-behavior). All registered behaviors can be conveniently managed using the [`ros2behavior` CLI](../reference/ros2behavior.md).
+The combination of a build request, a build handler and optionally an entry point and a node manifest is considered a single behavior. Altogether, they uniquely define the pattern of actions for a robotic system. Typically, they should be installed as resources in your ROS 2 workspace using the CMake macro [`auto_apms_behavior_tree_register_behavior`](../reference/cmake.md#register-behavior). All registered behaviors can be conveniently managed using the [`ros2behavior` CLI](../reference/ros2behavior.md).
 
 ## Task-Level Control
 

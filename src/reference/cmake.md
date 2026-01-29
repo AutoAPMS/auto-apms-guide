@@ -70,7 +70,7 @@ auto_apms_behavior_tree_register_behavior(<build_request>
   BUILD_HANDLER class_name
   [CATEGORY category]
   [ALIAS alias]
-  [ENTRYPOINT entrypoint]
+  [ENTRY_POINT entry_point]
   [NODE_MANIFEST node_manifest1 [node_manifest2 ...]]
   [MARK_AS_INTERNAL]
 )
@@ -82,7 +82,7 @@ auto_apms_behavior_tree_register_behavior(<build_request>
 | `BUILD_HANDLER` | Required | Fully qualified class name of the [behavior build handler](../concept/common-resources.md#behavior-build-handlers) that should be used by default to interpret the given behaviors. |
 | `CATEGORY` | Optional (Single-Value-Keyword) | Category name to which the behaviors belong. If omitted, the default category is used. |
 | `ALIAS` | Optional (Single-Value-Keyword) | Name for the behavior resource. If omitted, the file stem respectively the simple string is used as a behavior's alias. |
-| `ENTRYPOINT` | Optional (Single-Value-Keyword) | Single point of entry for behavior execution. For behavior trees, this usually is the name of the root tree, but for other types of behaviors, this may be populated differently. |
+| `ENTRY_POINT` | Optional (Single-Value-Keyword) | Single point of entry for behavior execution. For behavior trees, this usually is the name of the root tree, but for other types of behaviors, this may be populated differently. |
 | `NODE_MANIFEST` | Optional (Multi-Value-Keyword) | One or more relative paths (relative to `CMAKE_CURRENT_SOURCE_DIR`) or resource identities of existing node manifests. If specified, all associated behavior tree nodes can be loaded automatically thus are allowed to use in combination with the behavior defined by `build_request`. |
 | `MARK_AS_INTERNAL` | Optional (Option) | If this option is set, the behavior is assigned a special category which indicates it is intended for internal use only. |
 

@@ -14,7 +14,7 @@ ros2 behavior -h
 
 ## **`ros2 behavior`**
 
-This is the entrypoint for all subcommands.
+This is the entry point for all subcommands.
 
 **Usage:**
 
@@ -55,9 +55,6 @@ ros2 behavior list
 
 # List behaviors in specific categories
 ros2 behavior list -c tree mission
-
-# Include internal behaviors
-ros2 behavior list --include-internal
 ```
 
 **Output:**
@@ -80,12 +77,12 @@ Display the content/build request of a specific behavior resource.
 **Usage:**
 
 ```bash
-ros2 behavior show <behavior_resource>
+ros2 behavior show <behavior>
 ```
 
 **Arguments:**
 
-- `behavior_resource` - Identity string of the behavior resource to show
+- `behavior` - Identity string of the behavior resource to show
 
 **Examples:**
 
@@ -106,18 +103,21 @@ Execute a behavior tree locally in a standalone executor.
 **Usage:**
 
 ```bash
-ros2 behavior run [behavior_resource] [options]
+ros2 behavior run [behavior] [options]
 ```
 
 **Arguments:**
 
-- `behavior_resource` - Identity string of the behavior resource to execute (optional)
+- `behavior` - Identity string of the behavior resource to execute (optional)
 
 **Options:**
 
 | Option | Description |
 |---|---|
-| `--build-handler <namespace>::<class_name>` | Override the default behavior build handler. |
+| `--build-request <string>` | Build request to pass to the build handler (overrides build request associated with `behavior` if given). |
+| `--build-handler <namespace>::<class_name>` | Build handler to load (overrides build handler associated with `behavior` if given). |
+| `--entry-point <string>` | Entry point to pass to the build handler (overrides entry point associated with `behavior` if given). |
+| `--node-manifest <string>` | Node manifest resource to pass to the build handler (overrides node manifest associated with `behavior` if given). |
 | `--blackboard [key:=value ...]` | Blackboard variables to pass to the behavior tree. |
 | `--tick-rate <float>` | Tick rate for the behavior tree in seconds. |
 | `--groot2-port <int>` | Port for Groot2 visualization (disabled by default). |
@@ -133,11 +133,8 @@ ros2 behavior run navigation::explore
 # Run with custom blackboard variables
 ros2 behavior run navigation::explore --blackboard target_x:=10.0 target_y:=5.0
 
-# Run with custom tick rate and Groot2 visualization
-ros2 behavior run navigation::explore --tick-rate 2.0 --groot2-port 1667
-
-# Run with debug logging and state change logger
-ros2 behavior run navigation::explore --logging debug --state-change-logger
+# Run a dynamic request without predefined behavior
+ros2 behavior run --build-request "custom_request" --build-handler custom_namespace::CustomBuildHandler
 ```
 
 ---
@@ -149,19 +146,22 @@ Send a behavior tree to a running executor and start execution.
 **Usage:**
 
 ```bash
-ros2 behavior send <executor_name> <behavior_resource> [options]
+ros2 behavior send <executor_name> [behavior] [options]
 ```
 
 **Arguments:**
 
 - `executor_name` - Name of the behavior tree executor to send the tree to
-- `behavior_resource` - Identity string of the behavior resource to execute
+- `behavior` - Identity string of the behavior resource to execute
 
 **Options:**
 
 | Option | Description |
 |---|---|
-| `--build-handler <namespace>::<class_name>` | Override the default behavior build handler. |
+| `--build-request <string>` | Build request to pass to the build handler (overrides build request associated with `behavior` if given). |
+| `--build-handler <namespace>::<class_name>` | Build handler to load (overrides build handler associated with `behavior` if given). |
+| `--entry-point <string>` | Entry point to pass to the build handler (overrides entry point associated with `behavior` if given). |
+| `--node-manifest <string>` | Node manifest resource to pass to the build handler (overrides node manifest associated with `behavior` if given). |
 | `--blackboard [key:=value ...]` | Blackboard variables to pass to the behavior tree. |
 | `--keep-blackboard` | Do not explicitly clean the blackboard before execution (flag). |
 | `--tick-rate <float>` | Tick rate for the behavior tree in seconds (keeps current if omitted). |
@@ -178,11 +178,8 @@ ros2 behavior send my_executor navigation::explore
 # Send with blackboard variables
 ros2 behavior send my_executor navigation::explore --blackboard target_x:=10.0 target_y:=5.0
 
-# Send without clearing existing blackboard
-ros2 behavior send my_executor navigation::explore --keep-blackboard
-
-# Send with custom settings
-ros2 behavior send my_executor navigation::explore --tick-rate 1.0 --groot2-port 1667 --state-change-logger true
+# Send a dynamic request without predefined behavior
+ros2 behavior send my_executor --build-request "custom_request" --build-handler custom_namespace::CustomBuildHandler
 ```
 
 ---
