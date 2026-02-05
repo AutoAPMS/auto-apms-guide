@@ -44,18 +44,15 @@ ros2 run auto_apms_behavior_tree run_behavior "<build_request>" --ros-args -p bu
 ```py [launch.py]
 from launch import LaunchDescription
 from launch_ros.actions import Node
+from auto_apms_behavior_tree.launch import RunBehavior
 
 def generate_launch_description():
     return LaunchDescription(
         [
-            Node(
-                package="auto_apms_behavior_tree",
-                executable="run_behavior",
-                arguments=["<build_request>"],
-                parameters=[{
-                    "build_handler": "my_namespace::MyBuildHandlerClass"
-                }]
-            )
+            RunBehavior(
+                build_request="<build_request>",
+                build_handler="my_namespace::MyBuildHandlerClass"
+            ),
         ]
     )
 ```
