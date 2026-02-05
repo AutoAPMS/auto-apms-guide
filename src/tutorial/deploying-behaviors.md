@@ -7,18 +7,78 @@ In this tutorial we're going to describe everything that you need to know when u
 
 For deploying a behavior you need to [build a behavior tree](./building-behavior-trees.md) beforehand. Read the corresponding tutorial if you're not familiar with this process.
 
-## Using a Suitable Build Handler
+## Executing a Behavior
 
-To define how the executor builds the behavior tree to be executed, you must tell it which build handler implementation to use. This can be done by in two ways:
+The package `auto_apms_behavior_tree` offers an executable called `run_behavior` which automatically spawns the executor and starts executing a specific behavior in one go. It implements a custom runtime and handles SIGINT signals appropriately. Use it like this:
 
-- Setting the executor's ROS 2 parameter named `build_handler`.
-- Using the `build_handler` field of a [`StartTreeExecutor`](../concept/behavior-executor.md#starttreeexecutor) action goal.
+::: code-group
 
-The user is expected to provide a resource identity in order to specify the build handler to be used. Visit [this page](../concept/common-resources.md#behavior-build-handlers) to learn more about build handler resources and the standard implementations we provide.
+```bash [Terminal]
+ros2 run auto_apms_behavior_tree run_behavior -h  # Prints help information
+```
+
+```py [launch.py]
+from launch import LaunchDescription
+from auto_apms_behavior_tree.launch import RunBehavior
+
+def generate_launch_description():
+    return LaunchDescription(
+        [
+            RunBehavior(
+                # ...
+            )
+        ]
+    )
+```
+
+:::
+
+It accepts a `build_request`, `entry_point` and a `node_manifest` as arguments according to the [behavior definition](../concept/fundamentals.md#understanding-behaviors). By default, you can simply pass a [behavior tree resource identity](../concept/common-resources.md#behavior-trees) and the corresponding behavior tree will be executed immediately. This is because the behavior executor loads `TreeFromResourceBuildHandler` on startup if the user doesn't overwrite the default. You can specify a different build handler by setting the corresponding ROS 2 parameter like this:
+
+::: code-group
+
+```bash [Terminal]
+ros2 run auto_apms_behavior_tree run_behavior "<build_request>" --ros-args -p build_handler:=my_namespace::MyBuildHandlerClass
+```
+
+```py [launch.py]
+from launch import LaunchDescription
+from launch_ros.actions import Node
+
+def generate_launch_description():
+    return LaunchDescription(
+        [
+            Node(
+                package="auto_apms_behavior_tree",
+                executable="run_behavior",
+                arguments=["<build_request>"],
+                parameters=[{
+                    "build_handler": "my_namespace::MyBuildHandlerClass"
+                }]
+            )
+        ]
+    )
+```
+
+:::
+
+::: info
+If you cannot use `run_behavior` for some reason (e.g. when applying ROS 2 composition), you should first spawn the node and then, in a separate step, send a [`StartTreeExecutor`](../concept/behavior-executor.md#starttreeexecutor) action goal.
+
+As a last resort, you can also pass a build request as the first command line argument of `tree_executor` which populates the `arguments` member of `rclcpp::NodeOptions`. This will also cause the executor to automatically start ticking the behavior tree but the runtime doesn't handle interrupt signals very well.
+:::
+
+We also offer a package that extends the ROS 2 command line interface with a subcommand specifically dedicated to deploying behaviors. It wraps the `run_behavior` executable and offers tab completion. You simply need to build `auto_apms_ros2behavior` and source your workspace again. Afterwards, you have access to the [`ros2behavior` CLI extension](../reference/ros2behavior.md) which allows you to execute a behavior like this:
+
+```bash [Terminal]
+ros2 behavior run -h  # Prints help information
+```
+
+**This is the recommended way of executing behaviors from the command line** since it integrates very well with the other concepts introduced by AutoAPMS and looks the cleanest.
 
 ## Spinning the Executor
 
-Users may spawn the behavior tree executor as it's done with any other ROS 2 node. We provide a minimal executable called `tree_executor` which simply spins the node. It can be used from the terminal or inside a [ROS 2 launch file](https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Launch/Creating-Launch-Files.html) like this:
+Users may also spawn the behavior tree executor as a persistent ROS 2 node. Compared to running a behavior using a "one-shot" CLI tool, spawning the executor node has the advantage that we can dynamically execute a behavior during runtime e.g. from other ROS 2 nodes. We provide an executable called `tree_executor` which spawns the executor and spins the ROS 2 node until the process is interrupted. You may run it in the terminal or a [ROS 2 launch file](https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Launch/Creating-Launch-Files.html) like this:
 
 ::: code-group
 
@@ -81,75 +141,6 @@ def generate_launch_description():
 
 :::
 
-## Executing a Behavior
-
-The package `auto_apms_behavior_tree` additionally offers an executable called `run_behavior` which automatically spawns the executor and starts executing a specific behavior in one go. It implements a custom runtime and handles SIGINT signals appropriately. Use it like this:
-
-::: code-group
-
-```bash [Terminal]
-ros2 run auto_apms_behavior_tree run_behavior -h  # Prints help information
-```
-
-```py [launch.py]
-from launch import LaunchDescription
-from auto_apms_behavior_tree.launch import RunBehavior
-
-def generate_launch_description():
-    return LaunchDescription(
-        [
-            RunBehavior(
-                # ...
-            )
-        ]
-    )
-```
-
-:::
-
-It accepts one argument: The build request for the underlying build handler. By default, you can simply pass a [behavior tree resource identity](../concept/common-resources.md#behavior-trees) and the corresponding behavior tree will be executed immediately. This is because the behavior executor loads `TreeFromResourceBuildHandler` on startup. You can customize which build handler should be loaded initially by setting the corresponding ROS 2 parameter like this:
-
-::: code-group
-
-```bash [Terminal]
-ros2 run auto_apms_behavior_tree run_behavior "<build_request>" --ros-args -p build_handler:=my_namespace::MyBuildHandlerClass
-```
-
-```py [launch.py]
-from launch import LaunchDescription
-from launch_ros.actions import Node
-
-def generate_launch_description():
-    return LaunchDescription(
-        [
-            Node(
-                package="auto_apms_behavior_tree",
-                executable="run_behavior",
-                arguments=["<build_request>"],
-                parameters=[{
-                    "build_handler": "my_namespace::MyBuildHandlerClass"
-                }]
-            )
-        ]
-    )
-```
-
-:::
-
-::: info
-If you cannot use `run_behavior` for some reason (e.g. when applying ROS 2 composition), you should first spawn the node and then, in a separate step, send a [`StartTreeExecutor`](../concept/behavior-executor.md#starttreeexecutor) action goal.
-
-As a last resort, you can also pass a build request as the first command line argument of `tree_executor` which populates the `arguments` member of `rclcpp::NodeOptions`. This will also cause the executor to automatically start ticking the behavior tree but the runtime doesn't handle interrupt signals very well.
-:::
-
-We also offer a package that extends the ROS 2 command line interface with a subcommand specifically dedicated to deploying behaviors. It wraps the `run_behavior` executable and offers tab completion. You simply need to build `auto_apms_ros2behavior` and source your workspace again. Afterwards, you have access to the [`ros2behavior` CLI extension](../reference/ros2behavior.md) which allows you to execute a behavior like this:
-
-```bash [Terminal]
-ros2 behavior run -h  # Prints help information
-```
-
-**This is the recommended way of executing behaviors from the command line** since it integrates very well with the other concepts introduced by AutoAPMS and looks the cleanest.
-
 ## Interacting with the Executor
 
 Users may communicate with a spinning executor node by creating ROS 2 action clients and sending goals to the corresponding actions:
@@ -176,6 +167,15 @@ The following nodes allow for interacting with ROS 2 parameters from within a be
 - `GetParameter<TypeName>` (implemented for each ROS 2 parameter type)
 - [`SetParameter`](../reference/behavior-tree-nodes.md#setparameter)
 - `SetParameter<TypeName>` (implemented for each ROS 2 parameter type)
+
+## Using a Suitable Build Handler
+
+To define how the executor builds the behavior tree to be executed, you must tell it which build handler implementation to use. This can be done by in two ways:
+
+- Setting the executor's ROS 2 parameter named `build_handler`.
+- Using the `build_handler` field of a [`StartTreeExecutor`](../concept/behavior-executor.md#starttreeexecutor) action goal.
+
+The user is expected to provide a resource identity in order to specify the build handler to be used. Visit [this page](../concept/common-resources.md#behavior-build-handlers) to learn more about build handler resources and the standard implementations we provide.
 
 ## Nesting Behaviors
 
