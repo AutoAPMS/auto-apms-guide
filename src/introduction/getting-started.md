@@ -8,12 +8,6 @@ Start leveraging the advantages of Behavior Trees 🌳 fully integrated with ROS
 > [!NOTE]
 > Currently we support **Linux only**!.
 
-| ROS 2 | Build & Test |
-|:------------------:|:------:|
-| Jazzy Jalisco | [![Jazzy](https://github.com/AutoAPMS/auto-apms/actions/workflows/jazzy.yaml/badge.svg?branch=master)](https://github.com/AutoAPMS/auto-apms/actions/workflows/jazzy.yaml) |
-| Kilted Kaiju | [![Kilted](https://github.com/AutoAPMS/auto-apms/actions/workflows/kilted.yaml/badge.svg?branch=master)](https://github.com/AutoAPMS/auto-apms/actions/workflows/kilted.yaml) |
-| Rolling Ridley | [![Rolling](https://github.com/AutoAPMS/auto-apms/actions/workflows/rolling.yaml/badge.svg?branch=master)](https://github.com/AutoAPMS/auto-apms/actions/workflows/rolling.yaml) |
-
 ## Run your first Behavior
 
 The following installation guide helps you getting started with AutoAPMS.
@@ -53,6 +47,6 @@ The following installation guide helps you getting started with AutoAPMS.
 We provide a guide for running a cool **visual demonstration** on complex behaviors created with AutoAPMS in the [auto_apms_simulation](https://github.com/AutoAPMS/auto_apms_simulation) repository. The simulation shows multiple "robots" moving in a magical hall adjusting their behavior dynamically according to the following policy: Approach the goal as long as the hallway is not occupied - if it is, retreat. *Piertotum Locomotor!*
 
 <video autoplay controls>
-    <source src="https://github.com/user-attachments/assets/adbb7cab-1a9b-424b-af61-61c351986287" type="video/mp4">
+    <source src="https://github.com/user-attachments/assets/c7a63a50-b064-4db2-97ab-4d81464374d6" type="video/mp4">
 Your browser does not support the video tag.
 </video>
