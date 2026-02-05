@@ -5,7 +5,9 @@ sidebar: About
 ---
 # User Guide & Documentation
 
-[![Release](https://img.shields.io/github/v/release/autoapms/auto-apms?label=Release)](https://github.com/AutoAPMS/auto-apms/releases)
+[![jazzy](https://img.shields.io/ros/v/jazzy/autoapms?&logo=ros&label=ROS%202)](https://index.ros.org/r/autoapms/#jazzy)
+[![kilted](https://img.shields.io/ros/v/kilted/autoapms?&logo=ros&label=ROS%202)](https://index.ros.org/r/autoapms/#kilted)
+[![rolling](https://img.shields.io/ros/v/rolling/autoapms?&logo=ros&label=ROS%202)](https://index.ros.org/r/autoapms/#rolling)
 
 Welcome developers, engineers and ROS 2 enthusiasts! 🎉
 
