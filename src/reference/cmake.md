@@ -33,6 +33,7 @@ This approach was inspired by [ROS 2 Composition](https://docs.ros.org/en/jazzy/
 | `target` | Required (Positional) | Shared library target implementing the behavior tree nodes given under `class_names`. |
 | `class_names` | Required (Positional) | The unique, fully qualified names of behavior tree node classes (base class must be `BT::TreeNode`) being registered with this macro call and associated with the shared library target. |
 | `NODE_MANIFEST` | Optional (Multi-Value-Keyword) | One or more relative paths (relative to `CMAKE_CURRENT_SOURCE_DIR`) or existing resource identities of node manifests. Multiple file paths are concatenated to a single one. |
+| `NODE_MANIFEST_ALIAS` | Optional (Single-Value-Keyword) | An optional alias for the node manifest resulting from `NODE_MANIFEST`. By default, `target` will be used as alias, but this can be overridden by specifying this argument. |
 | `NODE_MODEL_HEADER_TARGET` | Optional (Single-Value-Keyword) | Name of a single shared library target. If specified, generate a C++ header that defines model classes for all behavior tree nodes specified inside the node manifest files provided under `NODE_MANIFEST` and add it to the includes of the given target. |
 
 ### Example
@@ -46,6 +47,8 @@ auto_apms_behavior_tree_register_nodes(my_target
   NODE_MANIFEST
   "path/to/my_node_manifest.yaml"     # Relative file path
   "other_package::other_metadata_id"  # Resource identity
+  NODE_MANIFEST_ALIAS 
+  "my_alias"
   NODE_MODEL_HEADER_TARGET
   other_target
 )
