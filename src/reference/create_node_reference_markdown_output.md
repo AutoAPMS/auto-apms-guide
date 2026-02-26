@@ -38,6 +38,7 @@
 | [Switch5](#switch5) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
 | [Switch6](#switch6) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
 | [Timeout](#timeout) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
+| [TryCatch](#trycatch) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
 | [UnsetBlackboard](#unsetblackboard) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
 | [WaitValueUpdate](#waitvalueupdate) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
 | [WasEntryUpdated](#wasentryupdated) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
@@ -215,7 +216,7 @@
 
 | Port Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **queue** | `std::shared_ptr<std::deque<bool, std::allocator<bool> > >` | ❌ |  |
+| **queue** | `BT::AnyTypeAllowed` | ❌ |  |
 
 ### LoopDouble
 
@@ -241,7 +242,7 @@
 
 | Port Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **queue** | `std::shared_ptr<std::deque<double, std::allocator<double> > >` | ❌ |  |
+| **queue** | `BT::AnyTypeAllowed` | ❌ |  |
 
 ### LoopInt
 
@@ -267,7 +268,7 @@
 
 | Port Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **queue** | `std::shared_ptr<std::deque<int, std::allocator<int> > >` | ❌ |  |
+| **queue** | `BT::AnyTypeAllowed` | ❌ |  |
 
 ### LoopString
 
@@ -293,7 +294,7 @@
 
 | Port Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **queue** | `std::shared_ptr<std::deque<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > > >` | ❌ |  |
+| **queue** | `BT::AnyTypeAllowed` | ❌ |  |
 
 ### Parallel
 
@@ -614,6 +615,20 @@
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
 | **msec** | `unsigned int` | ❌ | After a certain amount of time, halt() the child if it is still running. |
+
+### TryCatch
+
+**C++ Model:** `auto_apms_behavior_tree::TryCatch`
+
+**Node Type:** `Control`
+
+**Description:** No description provided.
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **catch_on_halt** | `bool` | false | If true, execute the catch child when the node is halted during the try-block |
 
 ### UnsetBlackboard
 
