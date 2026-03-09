@@ -8,7 +8,7 @@ hero:
   text: Streamlining Behaviors in ROS 2
   tagline: Automated Action Planning and Management System for Robotics
   image:
-    src: /logo/logo-wo-text.png
+    src: /logo/autoapms_icon.svg
     width: 400
   actions:
     - theme: brand
