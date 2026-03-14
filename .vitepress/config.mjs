@@ -48,14 +48,14 @@ const vitePressOptions = {
         ['meta', { property: 'og:locale', content: 'en' }],
         ['meta', { property: 'og:title', content: 'AutoAPMS - Automated Action Planning and Management System' }],
         ['meta', { property: 'og:site_name', content: 'AutoAPMS' }],
-        ['meta', { property: 'og:image', content: 'https://autoapms.github.io/auto-apms-guide/logo/logo-og.png' }],
+        ['meta', { property: 'og:image', content: 'https://autoapms.github.io/auto-apms-guide/logo/autoapms_og.png' }],
         ['meta', { property: 'og:image:width', content: '1306' }],
         ['meta', { property: 'og:image:height', content: '910' }],
         ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
         ['meta', { property: 'twitter:domain', content: 'autoapms.github.io' }],
         ['meta', { property: 'twitter:url', content: 'https://autoapms.github.io/auto-apms-guide/' }],
         ['meta', { name: 'twitter:title', content: 'AutoAPMS - Automated Action Planning and Management System' }],
-        ['meta', { name: 'twitter:image', content: 'https://autoapms.github.io/auto-apms-guide/logo/logo-og.png' }],
+        ['meta', { name: 'twitter:image', content: 'https://autoapms.github.io/auto-apms-guide/logo/autoapms_og.png' }],
 
         // Google Search Console
         ['meta', { name: 'google-site-verification', content: 'deYaqCwJq_6IydHhpWd_eiMjPjwJJ_yelf0aAgET3Ow' }]
@@ -76,7 +76,7 @@ const vitePressOptions = {
         // https://vitepress.dev/reference/default-theme-config
         siteTitle: 'AutoAPMS',
         externalLinkIcon: false,
-        logo: '/logo/favicon-96x96.png',
+        logo: '/logo/autoapms_icon.svg',
 
         search: {
             provider: "local",
@@ -88,7 +88,7 @@ const vitePressOptions = {
         ],
 
         socialLinks: [
-            { icon: 'github', link: 'https://github.com/AutoAPMS/auto-apms' }
+            { icon: 'github', link: 'https://github.com/AutoAPMS' }
         ],
 
         outline: [2, 3],

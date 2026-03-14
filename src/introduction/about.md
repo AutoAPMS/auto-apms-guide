@@ -3,6 +3,10 @@ order: 0
 title: User Guide
 sidebar: About
 ---
+
+<!-- markdown-link-check-disable-next-line -->
+[![AutoAPMS](/logo/autoapms_logo.svg)](https://github.com/AutoAPMS)
+
 # User Guide & Documentation
 
 [![jazzy](https://img.shields.io/ros/v/jazzy/autoapms?&logo=ros&label=jazzy)](https://index.ros.org/r/autoapms/#jazzy)
