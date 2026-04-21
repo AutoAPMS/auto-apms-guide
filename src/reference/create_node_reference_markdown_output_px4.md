@@ -12,6 +12,7 @@
 | [Land](#land) | `auto_apms_px4_behavior::LandAction` | auto_apms_px4_behavior |
 | [Mission](#mission) | `auto_apms_px4_behavior::MissionAction` | auto_apms_px4_behavior |
 | [RTL](#rtl) | `auto_apms_px4_behavior::RTLAction` | auto_apms_px4_behavior |
+| [SetActuators](#setactuators) | `auto_apms_px4_behavior::SetActuatorsAction` | auto_apms_px4_behavior |
 | [Takeoff](#takeoff) | `auto_apms_px4_behavior::TakeoffAction` | auto_apms_px4_behavior |
 
 ## auto_apms_px4_behavior
@@ -214,6 +215,24 @@
 **Description:** Commands the vehicle to return to its home position and land
 
 *This node doesn't have any ports.*
+
+### SetActuators
+
+**Plugin Class:** `auto_apms_px4_behavior::SetActuatorsAction`
+
+**C++ Model:** `auto_apms_px4_behavior::SetActuators`
+
+**Node Type:** `Action`
+
+**Description:** Sends direct actuator commands (motors and/or servos) to the vehicle
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **hold_period_ms** | `unsigned int` | 0 | Hold the commands for this duration [ms] before stopping. 0 = send once then stop immediately |
+| **servo_commands** | `std::vector<float, std::allocator<float> >` | ❌ | Servo commands as a semicolon-separated list. Range: [-1, 1], 'nan'|'NaN'|'NAN' = disarmed |
+| **motor_commands** | `std::vector<float, std::allocator<float> >` | ❌ | Motor commands as a semicolon-separated list. Range: [-1, 1], 'nan'|'NaN'|'NAN' = disarmed |
 
 ### Takeoff
 
