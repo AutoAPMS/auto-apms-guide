@@ -59,6 +59,7 @@
 | [Logger](#logger) | `auto_apms_behavior_tree::Logger` | auto_apms_behavior_tree |
 | [PauseExecutor](#pauseexecutor) | `auto_apms_behavior_tree::PauseExecutor` | auto_apms_behavior_tree |
 | [PublishPose](#publishpose) | `auto_apms_behavior_tree::PublishPose` | auto_apms_behavior_tree |
+| [PublishTwist](#publishtwist) | `auto_apms_behavior_tree::PublishTwist` | auto_apms_behavior_tree |
 | [ResumeExecutor](#resumeexecutor) | `auto_apms_behavior_tree::ResumeExecutor` | auto_apms_behavior_tree |
 | [SetBool](#setbool) | `auto_apms_behavior_tree::SetBool` | auto_apms_behavior_tree |
 | [SetEmpty](#setempty) | `auto_apms_behavior_tree::SetEmpty` | auto_apms_behavior_tree |
@@ -1018,6 +1019,29 @@
 | **use_degrees** | `bool` | false | If true, interpret roll, pitch, yaw as degrees instead of radians. |
 | **pitch** | `double` | 0.000000 | Target pitch angle in radians (or degrees if use_degrees is true). |
 | **yaw** | `double` | 0.000000 | Target yaw angle in radians (or degrees if use_degrees is true). |
+| **topic** | `std::string` | ❌ | Name of the ROS 2 topic to publish to. |
+
+### PublishTwist
+
+**Plugin Class:** `auto_apms_behavior_tree::PublishTwist`
+
+**C++ Model:** `auto_apms_behavior_tree::PublishTwist`
+
+**Node Type:** `Condition`
+
+**Description:** Publishes a geometry_msgs/TwistStamped message with linear and angular velocity
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **linear_x** | `double` | 0.000000 | Linear velocity along x-axis in m/s. |
+| **linear_y** | `double` | 0.000000 | Linear velocity along y-axis in m/s. |
+| **angular_x** | `double` | 0.000000 | Angular velocity around x-axis in rad/s. |
+| **linear_z** | `double` | 0.000000 | Linear velocity along z-axis in m/s. |
+| **frame_id** | `std::string` | map | Frame ID for the twist. |
+| **angular_y** | `double` | 0.000000 | Angular velocity around y-axis in rad/s. |
+| **angular_z** | `double` | 0.000000 | Angular velocity around z-axis in rad/s. |
 | **topic** | `std::string` | ❌ | Name of the ROS 2 topic to publish to. |
 
 ### ResumeExecutor
