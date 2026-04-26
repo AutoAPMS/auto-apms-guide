@@ -231,8 +231,8 @@
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
 | **hold_period_ms** | `unsigned int` | 0 | Hold the commands for this duration [ms] before stopping. 0 = send once then stop immediately |
-| **servo_commands** | `std::vector<float, std::allocator<float> >` | ❌ | Servo commands as a semicolon-separated list. Range: [-1, 1], 'nan'|'NaN'|'NAN' = disarmed |
-| **motor_commands** | `std::vector<float, std::allocator<float> >` | ❌ | Motor commands as a semicolon-separated list. Range: [-1, 1], 'nan'|'NaN'|'NAN' = disarmed |
+| **servo_commands** | `std::vector<float, std::allocator<float> >` | ❌ | Servo commands as a semicolon-separated list. Range: [-1, 1], 'nan'\|'NaN'\|'NAN' = disarmed |
+| **motor_commands** | `std::vector<float, std::allocator<float> >` | ❌ | Motor commands as a semicolon-separated list. Range: [-1, 1], 'nan'\|'NaN'\|'NAN' = disarmed |
 
 ### Takeoff
 
