@@ -163,7 +163,7 @@ ros2 behavior send <executor_name> [behavior] [options]
 | `--entry-point <string>` | Entry point to pass to the build handler (overrides entry point associated with `behavior` if given). |
 | `--node-manifest <string>` | Node manifest resource to pass to the build handler (overrides node manifest associated with `behavior` if given). |
 | `--blackboard [key:=value ...]` | Blackboard variables to pass to the behavior tree. |
-| `--keep-blackboard` | Do not explicitly clean the blackboard before execution (flag). |
+| `--clear-blackboard` | Explicitly clean the blackboard before execution (flag). |
 | `--tick-rate <float>` | Tick rate for the behavior tree in seconds (keeps current if omitted). |
 | `--groot2-port <int>` | Port for Groot2 visualization (keeps current if omitted). |
 | `--state-change-logger <true/false>` | Enable/disable state change logger (keeps current if omitted). |
