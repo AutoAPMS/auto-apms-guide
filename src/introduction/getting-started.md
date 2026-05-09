@@ -8,9 +8,39 @@ Start leveraging the advantages of Behavior Trees 🌳 fully integrated with ROS
 > [!NOTE]
 > Currently we support **Linux only**!.
 
-## Run your first Behavior
+## Installation
 
-The following installation guide helps you getting started with AutoAPMS.
+### Using deb packages
+
+You may install the corresponding debian packages from ROS 2's apt repository:
+
+**Core API**
+
+```bash
+sudo apt install ros-$ROS_DISTRO-auto-apms-behavior-tree-core
+```
+
+**Standard Nodes & Behavior Executor**
+
+```bash
+sudo apt install ros-$ROS_DISTRO-auto-apms-behavior-tree
+```
+
+**CLI Tooling**
+
+```bash
+sudo apt install ros-$ROS_DISTRO-auto-apms-ros2behavior
+```
+
+**Examples**
+
+```bash
+sudo apt install ros-$ROS_DISTRO-auto-apms-examples
+```
+
+### Build from Source
+
+As an alternative approach, you can also build from source:
 
 1. Create a [ROS 2 workspace](https://docs.ros.org/en/jazzy/Tutorials/Beginner-Client-Libraries/Creating-A-Workspace/Creating-A-Workspace.html) and clone this repository
 
@@ -33,14 +63,21 @@ The following installation guide helps you getting started with AutoAPMS.
     colcon build --packages-up-to auto_apms_examples --symlink-install
     ```
 
-1. Run your first behavior using `ros2 behavior`. This is an extension of the ROS 2 CLI introduced by the `auto_apms_ros2behavior` package
+1. Source the workspace to update your environment
 
     ```bash
     source install/setup.bash
-    ros2 behavior run auto_apms_examples::demo::HelloWorld --blackboard name:=Turtle
     ```
 
-    ![auto-apms-gif](https://github.com/user-attachments/assets/0039aa09-9448-4102-9eb3-38138a805728)
+## Run your first Behavior
+
+Run your first behavior using `ros2 behavior` (recommended). This is an extension of the ROS 2 CLI introduced by the `auto_apms_ros2behavior` package
+
+```bash
+ros2 behavior run auto_apms_examples::demo::HelloWorld --blackboard name:=Turtle
+```
+
+![auto-apms-gif](https://github.com/user-attachments/assets/0039aa09-9448-4102-9eb3-38138a805728)
 
 ## Visual Demonstration
 
