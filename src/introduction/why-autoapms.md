@@ -37,6 +37,10 @@ AutoAPMS provides developers of real-time systems with the following key feature
 
 - `ros2 behavior` command extending the ROS2 CLI for behavior management
 
+- Comprehensive user guide and [API Docs](https://autoapms.github.io/auto-apms/)
+
+- Web-based behavior tree editor and deployment tool [AutoAPMS Studio](https://github.com/AutoAPMS/auto_apms_studio)
+
 These features frame a unified toolset for implementing behavior-based systems and make it significantly more user-friendly and less error prone to design and execute robotic applications.
 
 ## What makes it special?
