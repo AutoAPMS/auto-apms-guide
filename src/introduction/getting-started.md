@@ -14,24 +14,28 @@ Start leveraging the advantages of Behavior Trees 🌳 fully integrated with ROS
 
 You may install the corresponding debian packages from ROS 2's apt repository:
 
+<!-- markdownlint-disable-next-line MD036 -->
 **Core API**
 
 ```bash
 sudo apt install ros-$ROS_DISTRO-auto-apms-behavior-tree-core
 ```
 
+<!-- markdownlint-disable-next-line MD036 -->
 **Standard Nodes & Behavior Executor**
 
 ```bash
 sudo apt install ros-$ROS_DISTRO-auto-apms-behavior-tree
 ```
 
+<!-- markdownlint-disable-next-line MD036 -->
 **CLI Tooling**
 
 ```bash
 sudo apt install ros-$ROS_DISTRO-auto-apms-ros2behavior
 ```
 
+<!-- markdownlint-disable-next-line MD036 -->
 **Examples**
 
 ```bash
