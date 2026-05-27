@@ -46,7 +46,7 @@ auto_apms_behavior_tree_register_nodes(my_target
   "my_namespace::MyCustomNodeBar"
   NODE_MANIFEST
   "path/to/my_node_manifest.yaml"     # Relative file path
-  "other_package::other_metadata_id"  # Resource identity
+  "other_package::other_alias"        # Resource identity
   NODE_MANIFEST_ALIAS 
   "my_alias"
   NODE_MODEL_HEADER_TARGET
@@ -134,7 +134,7 @@ auto_apms_behavior_tree_register_trees(
   "path/to/another_behavior_tree.xml"
   NODE_MANIFEST
   "path/to/my_node_manifest.yaml"     # Relative file path
-  "other_package::other_metadata_id"  # Resource identity
+  "other_package::other_alias"        # Resource identity
 )
 ```
 

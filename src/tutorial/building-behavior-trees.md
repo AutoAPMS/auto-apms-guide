@@ -68,7 +68,7 @@ When building with `symlink-install` enabled, the install directory only contain
 `build`/`<my_package>`/`auto_apms_behavior_tree_core`
 :::
 
-Inside this directory, you'll find files named like `node_model_<metadata_id>.xml`. Select the one that is associated with your use case and "Open" it. If you are not sure which `<metadata_id>` is the correct one, read the guide on [referring to node manifests](./implementing-behavior-tree-nodes.md#referring-to-node-manifests). It explains how the suffix for the node model XML files is determined.
+Inside this directory, you'll find files named like `node_model_<metadata_id>.xml`. Select the one that is associated with your use case and "Open" it. Typically, the `<metadata_id>` is the same as the `<manifest_alias>` [explained here](../concept/common-resources.md#node-manifest-identity). However, `<metadata_id>` can also be determined otherwise, depending on which CMake macro triggered the generation of the node model file. If you don't know which one to choose, you can open all of them and check which one contains the nodes you want to use.
 
 You'll notice that Groot2 has added the corresponding nodes to the list of "Models" on the lower left. You may drag and drop any of these nodes to the workspace area and use them as you'd like. Make sure to understand the [general concept of behavior trees](../concept/behavior-trees.md) before you start assembling nodes.
 

@@ -185,7 +185,7 @@ The recommended way of adding node manifests to a ROS 2 workspace is to use `aut
 
 ## Referring to Node Manifests
 
-Once you've added node manifests using one of the methods described above, it's possible to directly refer to them using a `<metadata_id>`. Understanding [how this identifier is determined](../concept/common-resources.md#node-manifest-identity) is crucial for the following. It is set depending on which CMake macro you call.
+Once you've added node manifests using one of the methods described above, it's possible to directly refer to them using a `<manifest_alias>`. Understanding [how this identifier is determined](../concept/common-resources.md#node-manifest-identity) is crucial for the following. It is set depending on which CMake macro you call.
 
 When using `auto_apms_behavior_tree_register_nodes`, it is determined by the name of the shared library target passed as the first positional argument.
 
@@ -203,9 +203,9 @@ You may also use node manifest resource identities when specifying the `NODE_MAN
 
     **This makes node manifests reusable.**
 
-    The identities are formatted like `<package_name>::<metadata_id>` and refer to specific, previously installed node manifests available with the resource index of your ROS 2 workspace.
+    The identities are formatted like `<package_name>::<manifest_alias>` and refer to specific, previously installed node manifests available with the resource index of your ROS 2 workspace.
 
-If you're providing a resource identity but no node manifest associated with `<metadata_id>` has been registered by the ROS 2 package `<package_name>`, CMake throws an error at configuration time.
+If you're providing a resource identity but no node manifest associated with `<manifest_alias>` has been registered by the ROS 2 package `<package_name>`, CMake throws an error at configuration time.
 
 So after successfully [adding node manifests](#adding-node-manifests) one may use resource identities to populate the `NODE_MANIFEST` argument as shown in the following snippet:
 
@@ -250,7 +250,7 @@ auto_apms_behavior_tree_register_trees(
 ```
 
 ::: tip Within the same package
-If you want to use nodes which have previously been registered **inside the same CMakeLists.txt**, you can conveniently write `${PROJECT_NAME}::<metadata_id>`. So referring to the example above, it would be `${PROJECT_NAME}::custom_nodes`.
+If you want to use nodes which have previously been registered **inside the same CMakeLists.txt**, you can conveniently write `${PROJECT_NAME}::<manifest_alias>`. So referring to the example above, it would be `${PROJECT_NAME}::custom_nodes`.
 :::
 
 If you initially passed multiple node manifest files to one of the mentioned CMake macros as it's the case with this example, they are automatically concatenated. When using the corresponding resource identity, **you implicitly refer to all manifest files given to the respective macro**.

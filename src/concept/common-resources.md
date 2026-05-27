@@ -196,14 +196,15 @@ MyCustomNodeRegistrationName:  # Registration name of the node
   extra: ~  # Can be any valid yaml object
 
 AnotherCoolNodeName:
-  class_name: another_namespace::AnotherCoolNodeClass
+  parent: other_namespace::OtherClass.OtherRegistrationName
 
 # ...
 ```
 
 | Parameter Name | Required/Optional | Interpreted Type | Description |
 | :--- | :---: | :---: | :--- |
-| `class_name` | Required | `std::string` | Fully qualified class name (includes all namespace levels separated by `::`) of the behavior tree node plugin that implements the functionality accessible to the behavior tree using the given registration name. We use the same approach for referring to specific behavior tree nodes as [ROS 2 Composition](https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-Composition.html) does for `rclcpp::Node` components. |
+| `parent` | Optional | `std::string` | Identity string formatted like `<package_name>::<manifest_alias>.<node_name>` referencing another node in an upstream node manifest. The node will inherit all registration options from its parent unless they are overridden by explicitly specifying them. This allows for avoiding redundancy when multiple nodes share most of their registration options. |
+| `class_name` | Required (if `parent` is omitted) | `std::string` | Fully qualified class name (includes all namespace levels separated by `::`) of the behavior tree node plugin that implements the functionality accessible to the behavior tree using the given registration name. We use the same approach for referring to specific behavior tree nodes as [ROS 2 Composition](https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-Composition.html) does for `rclcpp::Node` components. |
 | `description` | Optional | `std::string` | Short description of the behavior tree node's purpose and use-case. |
 | `topic` | Optional | `std::string` | *Only relevant for ROS 2 interface nodes.* Name of the ROS 2 action/service/topic to connect with. It is possible to use a port's value to define this parameter at runtime by using the special pattern `(input:<port_name>)` and replacing `<port_name>` with the desired input port name. |
 | `port_alias` | Optional | `std::map<std::string, std::string>` | Provides the possibility to rename ports implemented by `class_name`. This is useful when a node implementation is used in a different context and the meaning of some of the ports has changed. In this case, it's possible to define a more descriptive port name. The description can also be updated by appending it within round brackets (e.g. `original name: alias_name (new description)`). |
@@ -219,7 +220,7 @@ You should understand that registration options are directly associated with a p
 
 You may include an arbitrary number of nodes in a node manifest. It's also possible to use the same implementation (specify the same node class name) for different registration names. However, the node registration names within a node manifest must be unique.
 
-Only the `class_name` option is required. The example above shows the default values that will be used if any optional parameters are omitted. The node classes referred to by `class_name` must have been registered using [`auto_apms_behavior_tree_register_nodes`](../reference/cmake.md#auto-apms-behavior-tree-register-nodes) before the node manifest is parsed (specifying the node manifest in the same macro call is ok).
+Only the `class_name` option is required. However, it can be inherited by populating `parent`. The example above shows the default values that will be used if any optional parameters are omitted. The node classes referred to by `class_name` must have been registered using [`auto_apms_behavior_tree_register_nodes`](../reference/cmake.md#auto-apms-behavior-tree-register-nodes) before the node manifest is parsed (specifying the node manifest in the same macro call is ok).
 
 ::: info Learn more 🎓
 Visit the tutorial [Implementing Behavior Tree Nodes: Adding Node Manifests](../tutorial/implementing-behavior-tree-nodes.md#adding-node-manifests) for more information about how to register a node manifest with the resource index.
@@ -229,12 +230,12 @@ Visit the tutorial [Implementing Behavior Tree Nodes: Adding Node Manifests](../
 
 This is the full signature of a node manifest's resource identity:
 
-- `<package_name>::<metadata_id>`
+- `<package_name>::<manifest_alias>`
 
 | Token Name | Description |
 | :---: | :--- |
 | `<package_name>` | Name of the ROS 2 package that registers the resource. |
-| `<metadata_id>` | Identifier for the behavior tree node metadata that is automatically generated at configuration time when specifying the `NODE_MANIFEST` keyword argument of [`auto_apms_behavior_tree_register_nodes`](../reference/cmake.md#register-nodes). In this case, it **corresponds to the shared library target name** (first positional argument). |
+| `<manifest_alias>` | Alias for the behavior tree node manifest that is automatically generated at configuration time when specifying the `NODE_MANIFEST` keyword argument of [`auto_apms_behavior_tree_register_nodes`](../reference/cmake.md#register-nodes). |
 
 ::: tip Convention 📜
 Typically, `auto_apms_behavior_tree_register_nodes` is called only once per package and the shared library target linking against all behavior tree node source files should be named `behavior_tree_nodes`. So, by convention, the identity of a package's node manifest is `<package_name>::behavior_tree_nodes`.
