@@ -109,16 +109,16 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **reached_thresh_yaw** | `double` | 7.000000 | Maximum heading error [°] under which the position is considered reached |
-| **reached_thresh_vel** | `double` | 0.300000 | Maximum velocity error [m/s] under which the position is considered reached |
-| **reached_thresh_pos** | `double` | 0.500000 | Maximum position error [m] under which the position is considered reached |
-| **max_heading_rate** | `double` | 30.000000 | Maximum heading rate [°/s] |
-| **max_vertical_vel** | `double` | 5.000000 | Maximum vertical velocity [m/s] |
-| **max_horizontal_vel** | `double` | 10.000000 | Maximum horizontal velocity [m/s] |
-| **yaw** | `double` | ❌ | Desired yaw position in degree from north (heading) [-180°, 180) |
-| **z** | `double` | ❌ | Override vector entry Z |
-| **y** | `double` | ❌ | Override vector entry Y |
-| **x** | `double` | ❌ | Override vector entry X |
+| **reached_thresh_yaw** | `float` | 7.000000 | Maximum heading error [°] under which the position is considered reached |
+| **reached_thresh_vel** | `float` | 0.300000 | Maximum velocity error [m/s] under which the position is considered reached |
+| **reached_thresh_pos** | `float` | 0.500000 | Maximum position error [m] under which the position is considered reached |
+| **max_heading_rate** | `float` | 30.000000 | Maximum heading rate [°/s] |
+| **max_vertical_vel** | `float` | 5.000000 | Maximum vertical velocity [m/s] |
+| **max_horizontal_vel** | `float` | 10.000000 | Maximum horizontal velocity [m/s] |
+| **yaw** | `float` | ❌ | Desired yaw position in degree from north (heading) [-180°, 180) |
+| **z** | `float` | ❌ | Override vector entry Z |
+| **y** | `float` | ❌ | Override vector entry Y |
+| **x** | `float` | ❌ | Override vector entry X |
 | **vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | ❌ | Target position as a row vector (separated by ';') |
 | **frame** | `std::string` | global | Reference frame: 'global' (Latitude, longitude, altitude (AMSL)) or 'local' (North, east, down from start) |
 
@@ -136,16 +136,16 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **reached_thresh_yaw** | `double` | 7.000000 | Maximum heading error [°] under which the position is considered reached |
-| **reached_thresh_vel** | `double` | 0.300000 | Maximum velocity error [m/s] under which the position is considered reached |
-| **reached_thresh_pos** | `double` | 0.500000 | Maximum position error [m] under which the position is considered reached |
-| **max_heading_rate** | `double` | 30.000000 | Maximum heading rate [°/s] |
-| **max_vertical_vel** | `double` | 5.000000 | Maximum vertical velocity [m/s] |
-| **max_horizontal_vel** | `double` | 10.000000 | Maximum horizontal velocity [m/s] |
-| **yaw** | `double` | ❌ | Desired yaw position in degree from north (heading) [-180°, 180) |
-| **z** | `double` | ❌ | Override vector entry Z |
-| **y** | `double` | ❌ | Override vector entry Y |
-| **x** | `double` | ❌ | Override vector entry X |
+| **reached_thresh_yaw** | `float` | 7.000000 | Maximum heading error [°] under which the position is considered reached |
+| **reached_thresh_vel** | `float` | 0.300000 | Maximum velocity error [m/s] under which the position is considered reached |
+| **reached_thresh_pos** | `float` | 0.500000 | Maximum position error [m] under which the position is considered reached |
+| **max_heading_rate** | `float` | 30.000000 | Maximum heading rate [°/s] |
+| **max_vertical_vel** | `float` | 5.000000 | Maximum vertical velocity [m/s] |
+| **max_horizontal_vel** | `float` | 10.000000 | Maximum horizontal velocity [m/s] |
+| **yaw** | `float` | ❌ | Desired yaw position in degree from north (heading) [-180°, 180) |
+| **z** | `float` | ❌ | Override vector entry Z |
+| **y** | `float` | ❌ | Override vector entry Y |
+| **x** | `float` | ❌ | Override vector entry X |
 | **vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | ❌ | Target position as a row vector (separated by ';') |
 | **frame** | `std::string` | global | Reference frame: 'global' (Latitude, longitude, altitude (AMSL)) or 'local' (North, east, down from start) |
 
@@ -163,16 +163,16 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **reached_thresh_yaw** | `double` | 7.000000 | Maximum heading error [°] under which the position is considered reached |
-| **reached_thresh_vel** | `double` | 0.300000 | Maximum velocity error [m/s] under which the position is considered reached |
-| **reached_thresh_pos** | `double` | 0.500000 | Maximum position error [m] under which the position is considered reached |
-| **max_heading_rate** | `double` | 30.000000 | Maximum heading rate [°/s] |
-| **max_vertical_vel** | `double` | 5.000000 | Maximum vertical velocity [m/s] |
-| **max_horizontal_vel** | `double` | 10.000000 | Maximum horizontal velocity [m/s] |
-| **yaw** | `double` | ❌ | Desired yaw position in degree from north (heading) [-180°, 180) |
-| **z** | `double` | ❌ | Override vector entry Z |
-| **y** | `double` | ❌ | Override vector entry Y |
-| **x** | `double` | ❌ | Override vector entry X |
+| **reached_thresh_yaw** | `float` | 7.000000 | Maximum heading error [°] under which the position is considered reached |
+| **reached_thresh_vel** | `float` | 0.300000 | Maximum velocity error [m/s] under which the position is considered reached |
+| **reached_thresh_pos** | `float` | 0.500000 | Maximum position error [m] under which the position is considered reached |
+| **max_heading_rate** | `float` | 30.000000 | Maximum heading rate [°/s] |
+| **max_vertical_vel** | `float` | 5.000000 | Maximum vertical velocity [m/s] |
+| **max_horizontal_vel** | `float` | 10.000000 | Maximum horizontal velocity [m/s] |
+| **yaw** | `float` | ❌ | Desired yaw position in degree from north (heading) [-180°, 180) |
+| **z** | `float` | ❌ | Override vector entry Z |
+| **y** | `float` | ❌ | Override vector entry Y |
+| **x** | `float` | ❌ | Override vector entry X |
 | **vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | ❌ | Target position as a row vector (separated by ';') |
 | **frame** | `std::string` | local | Reference frame: 'global' (Latitude, longitude, altitude (AMSL)) or 'local' (North, east, down from start) |
 
@@ -248,4 +248,6 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **alt** | `double` | ❌ | Target takeoff altitude in meter (AMSL) |
+| **heading** | `float` | 0.000000 | Heading after takeoff in radians from north in NED frame |
+| **use_amsl** | `bool` | false | If true, altitude is interpreted as above mean sea level (AMSL), otherwise as altitude above takeoff point |
+| **alt** | `float` | ❌ | Target altitude for takeoff in meters |
