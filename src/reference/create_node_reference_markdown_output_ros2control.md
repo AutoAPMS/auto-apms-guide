@@ -2,6 +2,8 @@
 | Registration Name | Class Name | Package |
 | :--- | :---: | :---: |
 | [ActivateController](#activatecontroller) | `auto_apms_ros2control::SwitchController` | auto_apms_ros2control |
+| [CheckControllerState](#checkcontrollerstate) | `auto_apms_ros2control::CheckControllerState` | auto_apms_ros2control |
+| [CheckHardwareState](#checkhardwarestate) | `auto_apms_ros2control::CheckHardwareState` | auto_apms_ros2control |
 | [CleanupController](#cleanupcontroller) | `auto_apms_ros2control::CleanupController` | auto_apms_ros2control |
 | [ConfigureController](#configurecontroller) | `auto_apms_ros2control::ConfigureController` | auto_apms_ros2control |
 | [DeactivateController](#deactivatecontroller) | `auto_apms_ros2control::SwitchController` | auto_apms_ros2control |
@@ -31,8 +33,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **controller** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` |  | Name of the controller to activate. |
 | **strictness** | `std::string` | STRICT | Switching behavior on error. One of: BEST_EFFORT, STRICT, AUTO, FORCE_AUTO. |
+| **activate_controllers** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` |  | ';'-separated names of the controllers to activate. |
 | **controller_manager** | `std::string` | controller_manager | Name of the targeted controller manager. |
 
 #### Output Ports
@@ -40,6 +42,54 @@
 | Output Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
 | **message** | `std::string` | ❌ | Service response: informational message. |
+
+### CheckControllerState
+
+**Plugin Class:** `auto_apms_ros2control::CheckControllerState`
+
+**C++ Model:** `auto_apms_ros2control::CheckControllerState`
+
+**Node Type:** `Action`
+
+**Description:** Checks the current state of a single controller loaded by the controller manager
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **state** | `std::string` |  | Expected state of the controller (e.g. active, inactive, unconfigured). If empty, only the existence of the controller is checked. |
+| **controller** | `std::string` | ❌ | Name of the controller to check. |
+| **controller_manager** | `std::string` | controller_manager | Name of the targeted controller manager. |
+
+#### Output Ports
+
+| Output Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **current_state** | `std::string` | ❌ | Current state of the controller. |
+
+### CheckHardwareState
+
+**Plugin Class:** `auto_apms_ros2control::CheckHardwareState`
+
+**C++ Model:** `auto_apms_ros2control::CheckHardwareState`
+
+**Node Type:** `Action`
+
+**Description:** Checks the current lifecycle state of a single hardware component loaded by the controller manager
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **state** | `std::string` |  | Expected lifecycle state of the hardware component (e.g. active, inactive, unconfigured, finalized). If empty, only the existence of the component is checked. |
+| **hardware** | `std::string` | ❌ | Name of the hardware component to check. |
+| **controller_manager** | `std::string` | controller_manager | Name of the targeted controller manager. |
+
+#### Output Ports
+
+| Output Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **current_state** | `std::string` | ❌ | Current lifecycle state label of the hardware component. |
 
 ### CleanupController
 
@@ -89,8 +139,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **controller** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` |  | Name of the controller to deactivate. |
 | **strictness** | `std::string` | STRICT | Switching behavior on error. One of: BEST_EFFORT, STRICT, AUTO, FORCE_AUTO. |
+| **deactivate_controllers** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` |  | ';'-separated names of the controllers to deactivate. |
 | **controller_manager** | `std::string` | controller_manager | Name of the targeted controller manager. |
 
 #### Output Ports
