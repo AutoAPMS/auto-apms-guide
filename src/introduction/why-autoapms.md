@@ -45,6 +45,6 @@ These features frame a unified toolset for implementing behavior-based systems a
 
 ## What makes it special?
 
-Behavior trees have also been adopted for creating robotic applications by e.g. [Nav2 Behavior Tree](https://docs.nav2.org/behavior_trees/index.html). Compared to the `nav2_behavior_tree` package, AutoAPMS thinks behavior trees further. The entire project is dedicated to simplify behavior development and automates/standardizes most of the troublesome and error-prone manual development work.
+Behavior trees have also been adopted for creating robotic applications by e.g. [Nav2 Behavior Tree](https://docs.nav2.org/rolling/getting_started/nav2_behavior_trees/). Compared to the `nav2_behavior_tree` package, AutoAPMS thinks behavior trees further. The entire project is dedicated to simplify behavior development and automates/standardizes most of the troublesome and error-prone manual development work.
 
 This project wraps the functionality of [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP) and fully integrates it into the ROS 2 ecosystem in a lightweight manner. This way, we can leverage the advantages of behavior trees while keeping the overhead low. The core packages are written in C++ for performance reasons, but a supplementary Python API exposes high-level features for scripting.
