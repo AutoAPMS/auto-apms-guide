@@ -43,6 +43,8 @@
 | [WaitValueUpdate](#waitvalueupdate) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
 | [WasEntryUpdated](#wasentryupdated) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
 | [WhileDoElse](#whiledoelse) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
+| [CompositionLoadNode](#compositionloadnode) | `auto_apms_behavior_tree::CompositionLoadNode` | auto_apms_behavior_tree |
+| [CompositionUnloadNode](#compositionunloadnode) | `auto_apms_behavior_tree::CompositionUnloadNode` | auto_apms_behavior_tree |
 | [Error](#error) | `auto_apms_behavior_tree::ThrowException` | auto_apms_behavior_tree |
 | [GetParameter](#getparameter) | `auto_apms_behavior_tree::GetParameter` | auto_apms_behavior_tree |
 | [GetParameterBool](#getparameterbool) | `auto_apms_behavior_tree::GetParameterBool` | auto_apms_behavior_tree |
@@ -56,6 +58,12 @@
 | [GetParameterStringVec](#getparameterstringvec) | `auto_apms_behavior_tree::GetParameterStringVec` | auto_apms_behavior_tree |
 | [HaltExecutor](#haltexecutor) | `auto_apms_behavior_tree::HaltExecutor` | auto_apms_behavior_tree |
 | [HasParameter](#hasparameter) | `auto_apms_behavior_tree::HasParameter` | auto_apms_behavior_tree |
+| [LifecycleActivate](#lifecycleactivate) | `auto_apms_behavior_tree::LifecycleActivate` | auto_apms_behavior_tree |
+| [LifecycleChangeState](#lifecyclechangestate) | `auto_apms_behavior_tree::LifecycleChangeState` | auto_apms_behavior_tree |
+| [LifecycleCleanup](#lifecyclecleanup) | `auto_apms_behavior_tree::LifecycleCleanup` | auto_apms_behavior_tree |
+| [LifecycleConfigure](#lifecycleconfigure) | `auto_apms_behavior_tree::LifecycleConfigure` | auto_apms_behavior_tree |
+| [LifecycleDeactivate](#lifecycledeactivate) | `auto_apms_behavior_tree::LifecycleDeactivate` | auto_apms_behavior_tree |
+| [LifecycleGetState](#lifecyclegetstate) | `auto_apms_behavior_tree::LifecycleGetState` | auto_apms_behavior_tree |
 | [Logger](#logger) | `auto_apms_behavior_tree::Logger` | auto_apms_behavior_tree |
 | [PauseExecutor](#pauseexecutor) | `auto_apms_behavior_tree::PauseExecutor` | auto_apms_behavior_tree |
 | [PublishPose](#publishpose) | `auto_apms_behavior_tree::PublishPose` | auto_apms_behavior_tree |
@@ -685,6 +693,52 @@
 
 ## auto_apms_behavior_tree
 
+### CompositionLoadNode
+
+**Plugin Class:** `auto_apms_behavior_tree::CompositionLoadNode`
+
+**C++ Model:** `auto_apms_behavior_tree::CompositionLoadNode`
+
+**Node Type:** `Action`
+
+**Description:** Loads a composable node plugin into a ROS 2 component container
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **log_level** | `std::string` | UNSET | Log level for the loaded node. Must be one of [UNSET, DEBUG, INFO, WARN, ERROR, FATAL] (case-insensitive). UNSET (default) means the container's log level is inherited. |
+| **node_namespace** | `std::string` |  | Assigned namespace of the loaded node. Leave empty to use the plugin's default namespace. |
+| **node_name** | `std::string` |  | Assigned name of the loaded node. Leave empty to use the plugin's default name. |
+| **remap_rules** | `std::string` |  | Semicolon-separated list of static remapping rules applied to the loaded node (e.g. 'old_topic:=new_topic;foo:=bar'). |
+| **plugin** | `std::string` | ❌ | Name of the composable node plugin to load. |
+| **package** | `std::string` | ❌ | Name of the ROS 2 package containing the composable node plugin. |
+| **container** | `std::string` | ❌ | Name of the component container to load the node into. |
+
+#### Output Ports
+
+| Output Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **full_node_name** | `std::string` | ❌ | Full node name (namespace/name) of the loaded node (empty if loading failed). |
+| **unique_id** | `unsigned long` | ❌ | Container-local unique ID assigned to the loaded node (0 if loading failed). |
+
+### CompositionUnloadNode
+
+**Plugin Class:** `auto_apms_behavior_tree::CompositionUnloadNode`
+
+**C++ Model:** `auto_apms_behavior_tree::CompositionUnloadNode`
+
+**Node Type:** `Action`
+
+**Description:** Unloads a composable node from a ROS 2 component container by unique ID
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **unique_id** | `unsigned long` | ❌ | Container-local unique ID of the composable node to unload. |
+| **container** | `std::string` | ❌ | Name of the component container to unload the node from. |
+
 ### Error
 
 **Plugin Class:** `auto_apms_behavior_tree::ThrowException`
@@ -963,6 +1017,110 @@
 | :--- | :---: | :---: | :--- |
 | **parameter** | `std::string` | ❌ | Name of the parameter. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+
+### LifecycleActivate
+
+**Plugin Class:** `auto_apms_behavior_tree::LifecycleActivate`
+
+**C++ Model:** `auto_apms_behavior_tree::LifecycleActivate`
+
+**Node Type:** `Action`
+
+**Description:** Sends the 'activate' transition (id=3) to a ROS 2 lifecycle node
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted lifecycle node. |
+
+### LifecycleChangeState
+
+**Plugin Class:** `auto_apms_behavior_tree::LifecycleChangeState`
+
+**C++ Model:** `auto_apms_behavior_tree::LifecycleChangeState`
+
+**Node Type:** `Action`
+
+**Description:** Executes a lifecycle state machine transition on a ROS 2 managed node
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **transition** | `int` | ❌ | ID of the lifecycle state machine transition to execute. Refer to lifecycle_msgs/msg/Transition for available values (configure=1, cleanup=2, activate=3, deactivate=4, unconfigured_shutdown=5, inactive_shutdown=6, active_shutdown=7). |
+| **node** | `std::string` | ❌ | Name of the targeted lifecycle node. |
+
+### LifecycleCleanup
+
+**Plugin Class:** `auto_apms_behavior_tree::LifecycleCleanup`
+
+**C++ Model:** `auto_apms_behavior_tree::LifecycleCleanup`
+
+**Node Type:** `Action`
+
+**Description:** Sends the 'cleanup' transition (id=2) to a ROS 2 lifecycle node
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted lifecycle node. |
+
+### LifecycleConfigure
+
+**Plugin Class:** `auto_apms_behavior_tree::LifecycleConfigure`
+
+**C++ Model:** `auto_apms_behavior_tree::LifecycleConfigure`
+
+**Node Type:** `Action`
+
+**Description:** Sends the 'configure' transition (id=1) to a ROS 2 lifecycle node
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted lifecycle node. |
+
+### LifecycleDeactivate
+
+**Plugin Class:** `auto_apms_behavior_tree::LifecycleDeactivate`
+
+**C++ Model:** `auto_apms_behavior_tree::LifecycleDeactivate`
+
+**Node Type:** `Action`
+
+**Description:** Sends the 'deactivate' transition (id=4) to a ROS 2 lifecycle node
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted lifecycle node. |
+
+### LifecycleGetState
+
+**Plugin Class:** `auto_apms_behavior_tree::LifecycleGetState`
+
+**C++ Model:** `auto_apms_behavior_tree::LifecycleGetState`
+
+**Node Type:** `Action`
+
+**Description:** Retrieves the current lifecycle state of a ROS 2 managed node
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted lifecycle node. |
+
+#### Output Ports
+
+| Output Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **state_label** | `std::string` | ❌ | Human-readable label of the current lifecycle state. |
+| **state_id** | `unsigned char` | ❌ | Numeric ID of the current lifecycle state. |
 
 ### Logger
 
