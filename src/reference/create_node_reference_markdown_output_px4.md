@@ -1,67 +1,76 @@
 <!-- markdownlint-disable MD024 MD041 MD060 -->
 | Registration Name | Class Name | Package |
 | :--- | :---: | :---: |
-| [Arm](#arm) | `auto_apms_px4_behavior::ArmAction` | auto_apms_px4_behavior |
-| [Disarm](#disarm) | `auto_apms_px4_behavior::DisarmAction` | auto_apms_px4_behavior |
-| [EnableHold](#enablehold) | `auto_apms_px4_behavior::EnableHoldAction` | auto_apms_px4_behavior |
-| [GetGlobalPosition](#getglobalposition) | `auto_apms_px4_behavior::GetPosition<GlobalPositionMsg>` | auto_apms_px4_behavior |
-| [GetLocalPosition](#getlocalposition) | `auto_apms_px4_behavior::GetPosition<LocalPositionMsg>` | auto_apms_px4_behavior |
-| [GoTo](#goto) | `auto_apms_px4_behavior::GoToAction` | auto_apms_px4_behavior |
-| [GoToGlobal](#gotoglobal) | `auto_apms_px4_behavior::GoToAction` | auto_apms_px4_behavior |
-| [GoToLocal](#gotolocal) | `auto_apms_px4_behavior::GoToAction` | auto_apms_px4_behavior |
-| [Land](#land) | `auto_apms_px4_behavior::LandAction` | auto_apms_px4_behavior |
-| [Mission](#mission) | `auto_apms_px4_behavior::MissionAction` | auto_apms_px4_behavior |
-| [RTL](#rtl) | `auto_apms_px4_behavior::RTLAction` | auto_apms_px4_behavior |
-| [SetActuators](#setactuators) | `auto_apms_px4_behavior::SetActuatorsAction` | auto_apms_px4_behavior |
-| [Takeoff](#takeoff) | `auto_apms_px4_behavior::TakeoffAction` | auto_apms_px4_behavior |
+| [CheckArmingState](#checkarmingstate) | `auto_apms_px4::CheckArmingState` | auto_apms_px4 |
+| [CheckModeCompleted](#checkmodecompleted) | `auto_apms_px4::CheckModeCompleted` | auto_apms_px4 |
+| [CheckNavState](#checknavstate) | `auto_apms_px4::CheckNavState` | auto_apms_px4 |
+| [GetGlobalPosition](#getglobalposition) | `auto_apms_px4::GetPosition<GlobalPositionMsg>` | auto_apms_px4 |
+| [GetLocalPosition](#getlocalposition) | `auto_apms_px4::GetPosition<LocalPositionMsg>` | auto_apms_px4 |
+| [GetModeNavState](#getmodenavstate) | `auto_apms_px4::GetModeNavState` | auto_apms_px4 |
+| [GoTo](#goto) | `auto_apms_px4::GoToAction` | auto_apms_px4 |
+| [GoToGlobal](#gotoglobal) | `auto_apms_px4::GoToAction` | auto_apms_px4 |
+| [GoToLocal](#gotolocal) | `auto_apms_px4::GoToAction` | auto_apms_px4 |
+| [OffsetGlobalPosition](#offsetglobalposition) | `auto_apms_px4::OffsetGlobalPosition` | auto_apms_px4 |
+| [SendCmdDoReposition](#sendcmddoreposition) | `auto_apms_px4::SendCmdDoReposition` | auto_apms_px4 |
+| [SendCmdSetNavState](#sendcmdsetnavstate) | `auto_apms_px4::SendCmdSetNavState` | auto_apms_px4 |
+| [SendVehicleCommand](#sendvehiclecommand) | `auto_apms_px4::SendVehicleCommand` | auto_apms_px4 |
+| [SetActuators](#setactuators) | `auto_apms_px4::SetActuatorsAction` | auto_apms_px4 |
 
-## auto_apms_px4_behavior
+## auto_apms_px4
 
-### Arm
+### CheckArmingState
 
-**Plugin Class:** `auto_apms_px4_behavior::ArmAction`
+**Plugin Class:** `auto_apms_px4::CheckArmingState`
 
-**C++ Model:** `auto_apms_px4_behavior::Arm`
+**C++ Model:** `auto_apms_px4::CheckArmingState`
 
-**Node Type:** `Action`
+**Node Type:** `Condition`
 
-**Description:** Arms the vehicle, making it ready for takeoff
+**Description:** Succeeds once the vehicle's PX4 arming state matches the expected one (1 = disarmed, 2 = armed)
 
 #### Input Ports
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **wait_until_ready_to_arm** | `bool` | false | Wait for the UAV to be ready for arming. If false and UAV is not ready to arm, will be rejected. |
+| **arming_state** | `int` | ❌ | Expected PX4 arming state the vehicle should be in (1 = disarmed, 2 = armed). |
 
-### Disarm
+### CheckModeCompleted
 
-**Plugin Class:** `auto_apms_px4_behavior::DisarmAction`
+**Plugin Class:** `auto_apms_px4::CheckModeCompleted`
 
-**C++ Model:** `auto_apms_px4_behavior::Disarm`
+**C++ Model:** `auto_apms_px4::CheckModeCompleted`
 
-**Node Type:** `Action`
+**Node Type:** `Condition`
 
-**Description:** Disarms the vehicle if it is landed
+**Description:** Succeeds once the PX4 mode with the expected nav_state reports successful completion (mode_completed)
 
-*This node doesn't have any ports.*
+#### Input Ports
 
-### EnableHold
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **nav_state** | `int` | ❌ | PX4 navigation state (mode id) whose completion is awaited. |
 
-**Plugin Class:** `auto_apms_px4_behavior::EnableHoldAction`
+### CheckNavState
 
-**C++ Model:** `auto_apms_px4_behavior::EnableHold`
+**Plugin Class:** `auto_apms_px4::CheckNavState`
 
-**Node Type:** `Action`
+**C++ Model:** `auto_apms_px4::CheckNavState`
 
-**Description:** Enables or disables the position loiter mode
+**Node Type:** `Condition`
 
-*This node doesn't have any ports.*
+**Description:** Succeeds once the vehicle's active PX4 navigation state (nav_state) matches the expected one
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **nav_state** | `int` | ❌ | Expected PX4 navigation state (mode id) the vehicle should be in. |
 
 ### GetGlobalPosition
 
-**Plugin Class:** `auto_apms_px4_behavior::GetPosition<GlobalPositionMsg>`
+**Plugin Class:** `auto_apms_px4::GetPosition<GlobalPositionMsg>`
 
-**C++ Model:** `auto_apms_px4_behavior::GetGlobalPosition`
+**C++ Model:** `auto_apms_px4::GetGlobalPosition`
 
 **Node Type:** `Condition`
 
@@ -78,9 +87,9 @@
 
 ### GetLocalPosition
 
-**Plugin Class:** `auto_apms_px4_behavior::GetPosition<LocalPositionMsg>`
+**Plugin Class:** `auto_apms_px4::GetPosition<LocalPositionMsg>`
 
-**C++ Model:** `auto_apms_px4_behavior::GetLocalPosition`
+**C++ Model:** `auto_apms_px4::GetLocalPosition`
 
 **Node Type:** `Condition`
 
@@ -95,11 +104,33 @@
 | **north** | `double` | {north} | Current north [m] relative to origin |
 | **vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | {pos_vec} | Current local position vector (north [m], east [m], down [m]) |
 
+### GetModeNavState
+
+**Plugin Class:** `auto_apms_px4::GetModeNavState`
+
+**C++ Model:** `auto_apms_px4::GetModeNavState`
+
+**Node Type:** `Condition`
+
+**Description:** Resolves a PX4 mode's name to its nav_state (mode id) - builtin modes plus any registered custom mode
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **mode_name** | `std::string` | ❌ | Name of the registered PX4 mode to resolve. |
+
+#### Output Ports
+
+| Output Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **nav_state** | `int` | ❌ | Resolved PX4 navigation state (mode id) of the named mode. |
+
 ### GoTo
 
-**Plugin Class:** `auto_apms_px4_behavior::GoToAction`
+**Plugin Class:** `auto_apms_px4::GoToAction`
 
-**C++ Model:** `auto_apms_px4_behavior::GoTo`
+**C++ Model:** `auto_apms_px4::GoTo`
 
 **Node Type:** `Action`
 
@@ -124,9 +155,9 @@
 
 ### GoToGlobal
 
-**Plugin Class:** `auto_apms_px4_behavior::GoToAction`
+**Plugin Class:** `auto_apms_px4::GoToAction`
 
-**C++ Model:** `auto_apms_px4_behavior::GoToGlobal`
+**C++ Model:** `auto_apms_px4::GoToGlobal`
 
 **Node Type:** `Action`
 
@@ -151,9 +182,9 @@
 
 ### GoToLocal
 
-**Plugin Class:** `auto_apms_px4_behavior::GoToAction`
+**Plugin Class:** `auto_apms_px4::GoToAction`
 
-**C++ Model:** `auto_apms_px4_behavior::GoToLocal`
+**C++ Model:** `auto_apms_px4::GoToLocal`
 
 **Node Type:** `Action`
 
@@ -176,51 +207,103 @@
 | **vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | ❌ | Target position as a row vector (separated by ';') |
 | **frame** | `std::string` | local | Reference frame: 'global' (Latitude, longitude, altitude (AMSL)) or 'local' (North, east, down from start) |
 
-### Land
+### OffsetGlobalPosition
 
-**Plugin Class:** `auto_apms_px4_behavior::LandAction`
+**Plugin Class:** `auto_apms_px4::OffsetGlobalPosition`
 
-**C++ Model:** `auto_apms_px4_behavior::Land`
-
-**Node Type:** `Action`
-
-**Description:** Commands the vehicle to land at its current position
-
-*This node doesn't have any ports.*
-
-### Mission
-
-**Plugin Class:** `auto_apms_px4_behavior::MissionAction`
-
-**C++ Model:** `auto_apms_px4_behavior::Mission`
+**C++ Model:** `auto_apms_px4::OffsetGlobalPosition`
 
 **Node Type:** `Action`
 
-**Description:** Starts a mission that has been previously uploaded to the vehicle
+**Description:** Offsets a global position (lat, lon, alt) by a local NED vector [m] - e.g. to compute targets for SendCmdDoReposition
 
 #### Input Ports
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **do_restart** | `bool` | false | Wether to restart (true) or resume (false) the mission. |
+| **north** | `double` | 0.000000 | Offset towards north [m] |
+| **east** | `double` | 0.000000 | Offset towards east [m] |
+| **alt** | `double` | {alt} | Altitude [m] (AMSL) of the position to offset |
+| **down** | `double` | 0.000000 | Offset downwards [m] (negative to go up) |
+| **lon** | `double` | {lon} | Longitude [°] of the position to offset |
+| **lat** | `double` | {lat} | Latitude [°] of the position to offset |
 
-### RTL
+#### Output Ports
 
-**Plugin Class:** `auto_apms_px4_behavior::RTLAction`
+| Output Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **target_vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | {target_vec} | Resulting global position vector (latitude [°], longitude [°], altitude AMSL [m]) |
+| **target_alt** | `double` | {target_alt} | Resulting altitude [m] (AMSL) |
+| **target_lon** | `double` | {target_lon} | Resulting longitude [°] |
+| **target_lat** | `double` | {target_lat} | Resulting latitude [°] |
 
-**C++ Model:** `auto_apms_px4_behavior::RTL`
+### SendCmdDoReposition
+
+**Plugin Class:** `auto_apms_px4::SendCmdDoReposition`
+
+**C++ Model:** `auto_apms_px4::SendCmdDoReposition`
 
 **Node Type:** `Action`
 
-**Description:** Commands the vehicle to return to its home position and land
+**Description:** Commands the vehicle to reposition to a global WGS84 location (VEHICLE_CMD_DO_REPOSITION) while respecting mode-executor ownership
 
-*This node doesn't have any ports.*
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **ground_speed** | `double` | -1.000000 | Ground speed [m/s]. Negative selects the PX4 default. |
+| **yaw** | `double` | ❌ | Desired yaw [°] clockwise from north. Leave empty to keep the current heading mode. |
+| **altitude** | `double` | ❌ | Target altitude [m] (AMSL). |
+| **longitude** | `double` | ❌ | Target longitude [°] (WGS84). |
+| **latitude** | `double` | ❌ | Target latitude [°] (WGS84). |
+
+### SendCmdSetNavState
+
+**Plugin Class:** `auto_apms_px4::SendCmdSetNavState`
+
+**C++ Model:** `auto_apms_px4::SendCmdSetNavState`
+
+**Node Type:** `Action`
+
+**Description:** Switches the active PX4 flight mode (by nav_state) while respecting mode-executor ownership
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **nav_state** | `int` | ❌ | Target PX4 navigation state (mode id) to switch to. |
+
+### SendVehicleCommand
+
+**Plugin Class:** `auto_apms_px4::SendVehicleCommand`
+
+**C++ Model:** `auto_apms_px4::SendVehicleCommand`
+
+**Node Type:** `Action`
+
+**Description:** Publishes a raw PX4 VehicleCommand (command id + param1..param7) while respecting mode-executor ownership
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **target_component** | `int` | 0 | Component that should execute the command (0 = all). |
+| **target_system** | `int` | 0 | System that should execute the command. |
+| **confirmation** | `int` | 0 | Confirmation count (0 = first transmission of this command). |
+| **param7** | `double` | 0.000000 | Command parameter 7. |
+| **param6** | `double` | 0.000000 | Command parameter 6. |
+| **param5** | `double` | 0.000000 | Command parameter 5. |
+| **param4** | `double` | 0.000000 | Command parameter 4. |
+| **param3** | `double` | 0.000000 | Command parameter 3. |
+| **param2** | `double` | 0.000000 | Command parameter 2. |
+| **param1** | `double` | 0.000000 | Command parameter 1. |
+| **command** | `int` | ❌ | VehicleCommand command id (see px4_msgs/msg/VehicleCommand). |
 
 ### SetActuators
 
-**Plugin Class:** `auto_apms_px4_behavior::SetActuatorsAction`
+**Plugin Class:** `auto_apms_px4::SetActuatorsAction`
 
-**C++ Model:** `auto_apms_px4_behavior::SetActuators`
+**C++ Model:** `auto_apms_px4::SetActuators`
 
 **Node Type:** `Action`
 
@@ -233,21 +316,3 @@
 | **hold_period_ms** | `unsigned int` | 0 | Hold the commands for this duration [ms] before stopping. 0 = send once then stop immediately |
 | **servo_commands** | `std::vector<float, std::allocator<float> >` | ❌ | Servo commands as a semicolon-separated list. Range: [-1, 1], 'nan'\|'NaN'\|'NAN' = disarmed |
 | **motor_commands** | `std::vector<float, std::allocator<float> >` | ❌ | Motor commands as a semicolon-separated list. Range: [-1, 1], 'nan'\|'NaN'\|'NAN' = disarmed |
-
-### Takeoff
-
-**Plugin Class:** `auto_apms_px4_behavior::TakeoffAction`
-
-**C++ Model:** `auto_apms_px4_behavior::Takeoff`
-
-**Node Type:** `Action`
-
-**Description:** Commands the vehicle to take off to a specified altitude
-
-#### Input Ports
-
-| Input Name | Type | Default Value | Description |
-| :--- | :---: | :---: | :--- |
-| **heading** | `float` | 0.000000 | Heading after takeoff in radians from north in NED frame |
-| **use_amsl** | `bool` | false | If true, altitude is interpreted as above mean sea level (AMSL), otherwise as altitude above takeoff point |
-| **alt** | `float` | ❌ | Target altitude for takeoff in meters |
