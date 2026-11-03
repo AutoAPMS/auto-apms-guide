@@ -4,6 +4,7 @@
 | [ActivateController](#activatecontroller) | `auto_apms_ros2control::SwitchController` | auto_apms_ros2control |
 | [CheckControllerState](#checkcontrollerstate) | `auto_apms_ros2control::CheckControllerState` | auto_apms_ros2control |
 | [CheckHardwareState](#checkhardwarestate) | `auto_apms_ros2control::CheckHardwareState` | auto_apms_ros2control |
+| [CheckInterfaceValue](#checkinterfacevalue) | `auto_apms_ros2control::CheckInterfaceValue` | auto_apms_ros2control |
 | [CleanupController](#cleanupcontroller) | `auto_apms_ros2control::CleanupController` | auto_apms_ros2control |
 | [ConfigureController](#configurecontroller) | `auto_apms_ros2control::ConfigureController` | auto_apms_ros2control |
 | [DeactivateController](#deactivatecontroller) | `auto_apms_ros2control::SwitchController` | auto_apms_ros2control |
@@ -90,6 +91,32 @@
 | Output Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
 | **current_state** | `std::string` | ❌ | Current lifecycle state label of the hardware component. |
+
+### CheckInterfaceValue
+
+**Plugin Class:** `auto_apms_ros2control::CheckInterfaceValue`
+
+**C++ Model:** `auto_apms_ros2control::CheckInterfaceValue`
+
+**Node Type:** `Condition`
+
+**Description:** Checks whether the current value of an interface of the controller manager lies within a range
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **timeout** | `double` | 0.500000 | Age [s] of the most recent introspection message above which the check fails. |
+| **min** | `double` | -inf | Smallest value that passes the check. |
+| **max** | `double` | inf | Largest value that passes the check. |
+| **interface** | `std::string` | ❌ | Name of the interface as published by the introspection of the controller manager, e.g. 'state_interface.joint1/position'. |
+| **controller_manager** | `std::string` | controller_manager | Name of the targeted controller manager. |
+
+#### Output Ports
+
+| Output Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **value** | `double` | ❌ | Current value of the interface. |
 
 ### CleanupController
 
