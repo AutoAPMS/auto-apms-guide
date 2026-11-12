@@ -7,6 +7,7 @@
 | [AsyncSequence](#asyncsequence) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
 | [Delay](#delay) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
 | [Fallback](#fallback) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
+| [Finally](#finally) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
 | [ForceFailure](#forcefailure) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
 | [ForceSuccess](#forcesuccess) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
 | [IfThenElse](#ifthenelse) | `None` | auto_apms_behavior_tree (BehaviorTree.CPP) |
@@ -150,6 +151,20 @@
 **Description:** No description provided.
 
 *This node doesn't have any ports.*
+
+### Finally
+
+**C++ Model:** `auto_apms_behavior_tree::Finally`
+
+**Node Type:** `Control`
+
+**Description:** No description provided.
+
+#### Input Ports
+
+| Input Name | Type | Default Value | Description |
+| :--- | :---: | :---: | :--- |
+| **halt_timeout_msec** | `unsigned int` | 0 | When halted, how long to keep ticking cleanup before halting it unfinished, in milliseconds. 10 (the tick period) or less: a single tick, which cuts an asynchronous cleanup short. Above 10, halt() blocks the halting parent, and any enclosing Timeout, for up to this long, and nested Finally nodes add up; halts from another thread get a single tick. Keep it short |
 
 ### ForceFailure
 
@@ -533,8 +548,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **case_2** | `std::string` | ❌ |  |
 | **case_1** | `std::string` | ❌ |  |
+| **case_2** | `std::string` | ❌ |  |
 | **variable** | `std::string` | ❌ |  |
 
 ### Switch3
@@ -549,9 +564,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **case_3** | `std::string` | ❌ |  |
-| **case_2** | `std::string` | ❌ |  |
 | **case_1** | `std::string` | ❌ |  |
+| **case_2** | `std::string` | ❌ |  |
+| **case_3** | `std::string` | ❌ |  |
 | **variable** | `std::string` | ❌ |  |
 
 ### Switch4
@@ -566,10 +581,10 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **case_4** | `std::string` | ❌ |  |
-| **case_3** | `std::string` | ❌ |  |
-| **case_2** | `std::string` | ❌ |  |
 | **case_1** | `std::string` | ❌ |  |
+| **case_2** | `std::string` | ❌ |  |
+| **case_3** | `std::string` | ❌ |  |
+| **case_4** | `std::string` | ❌ |  |
 | **variable** | `std::string` | ❌ |  |
 
 ### Switch5
@@ -584,11 +599,11 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **case_5** | `std::string` | ❌ |  |
-| **case_4** | `std::string` | ❌ |  |
-| **case_3** | `std::string` | ❌ |  |
-| **case_2** | `std::string` | ❌ |  |
 | **case_1** | `std::string` | ❌ |  |
+| **case_2** | `std::string` | ❌ |  |
+| **case_3** | `std::string` | ❌ |  |
+| **case_4** | `std::string` | ❌ |  |
+| **case_5** | `std::string` | ❌ |  |
 | **variable** | `std::string` | ❌ |  |
 
 ### Switch6
@@ -603,12 +618,12 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **case_5** | `std::string` | ❌ |  |
-| **case_4** | `std::string` | ❌ |  |
-| **case_6** | `std::string` | ❌ |  |
-| **case_3** | `std::string` | ❌ |  |
-| **case_2** | `std::string` | ❌ |  |
 | **case_1** | `std::string` | ❌ |  |
+| **case_2** | `std::string` | ❌ |  |
+| **case_3** | `std::string` | ❌ |  |
+| **case_4** | `std::string` | ❌ |  |
+| **case_5** | `std::string` | ❌ |  |
+| **case_6** | `std::string` | ❌ |  |
 | **variable** | `std::string` | ❌ |  |
 
 ### Timeout
@@ -707,13 +722,13 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **log_level** | `std::string` | UNSET | Log level for the loaded node. Must be one of [UNSET, DEBUG, INFO, WARN, ERROR, FATAL] (case-insensitive). UNSET (default) means the container's log level is inherited. |
-| **node_namespace** | `std::string` |  | Assigned namespace of the loaded node. Leave empty to use the plugin's default namespace. |
-| **node_name** | `std::string` |  | Assigned name of the loaded node. Leave empty to use the plugin's default name. |
-| **remap_rules** | `std::string` |  | Semicolon-separated list of static remapping rules applied to the loaded node (e.g. 'old_topic:=new_topic;foo:=bar'). |
-| **plugin** | `std::string` | ❌ | Name of the composable node plugin to load. |
-| **package** | `std::string` | ❌ | Name of the ROS 2 package containing the composable node plugin. |
 | **container** | `std::string` | ❌ | Name of the component container to load the node into. |
+| **log_level** | `std::string` | UNSET | Log level for the loaded node. Must be one of [UNSET, DEBUG, INFO, WARN, ERROR, FATAL] (case-insensitive). UNSET (default) means the container's log level is inherited. |
+| **node_name** | `std::string` |  | Assigned name of the loaded node. Leave empty to use the plugin's default name. |
+| **node_namespace** | `std::string` |  | Assigned namespace of the loaded node. Leave empty to use the plugin's default namespace. |
+| **package** | `std::string` | ❌ | Name of the ROS 2 package containing the composable node plugin. |
+| **plugin** | `std::string` | ❌ | Name of the composable node plugin to load. |
+| **remap_rules** | `std::string` |  | Semicolon-separated list of static remapping rules applied to the loaded node (e.g. 'old_topic:=new_topic;foo:=bar'). |
 
 #### Output Ports
 
@@ -736,8 +751,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **unique_id** | `unsigned long` | ❌ | Container-local unique ID of the composable node to unload. |
 | **container** | `std::string` | ❌ | Name of the component container to unload the node from. |
+| **unique_id** | `unsigned long` | ❌ | Container-local unique ID of the composable node to unload. |
 
 ### Error
 
@@ -769,8 +784,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
 
@@ -792,8 +807,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
 
@@ -815,8 +830,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
 
@@ -838,8 +853,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
 
@@ -861,8 +876,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
 
@@ -884,8 +899,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
 
@@ -907,8 +922,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
 
@@ -930,8 +945,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
 
@@ -953,8 +968,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
 
@@ -976,8 +991,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
 
@@ -1015,8 +1030,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **parameter** | `std::string` | ❌ | Name of the parameter. |
 | **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **parameter** | `std::string` | ❌ | Name of the parameter. |
 
 ### LifecycleActivate
 
@@ -1048,8 +1063,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **transition** | `int` | ❌ | ID of the lifecycle state machine transition to execute. Refer to lifecycle_msgs/msg/Transition for available values (configure=1, cleanup=2, activate=3, deactivate=4, unconfigured_shutdown=5, inactive_shutdown=6, active_shutdown=7). |
 | **node** | `std::string` | ❌ | Name of the targeted lifecycle node. |
+| **transition** | `int` | ❌ | ID of the lifecycle state machine transition to execute. Refer to lifecycle_msgs/msg/Transition for available values (configure=1, cleanup=2, activate=3, deactivate=4, unconfigured_shutdown=5, inactive_shutdown=6, active_shutdown=7). |
 
 ### LifecycleCleanup
 
@@ -1119,8 +1134,8 @@
 
 | Output Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **state_label** | `std::string` | ❌ | Human-readable label of the current lifecycle state. |
 | **state_id** | `unsigned char` | ❌ | Numeric ID of the current lifecycle state. |
+| **state_label** | `std::string` | ❌ | Human-readable label of the current lifecycle state. |
 
 ### Logger
 
@@ -1136,8 +1151,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **message** | `BT::AnyTypeAllowed` | ❌ | Message to be logged via rclcpp::Logger. |
 | **level** | `std::string` | INFO | Logger level. Must be one of [UNSET, DEBUG, INFO, WARN, ERROR, FATAL] but is not case sensitive. |
+| **message** | `BT::AnyTypeAllowed` | ❌ | Message to be logged via rclcpp::Logger. |
 
 ### PauseExecutor
 
@@ -1169,15 +1184,15 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
+| **frame_id** | `std::string` | map | Frame ID for the pose. |
+| **pitch** | `double` | 0.000000 | Target pitch angle in radians (or degrees if use_degrees is true). |
+| **roll** | `double` | 0.000000 | Target roll angle in radians (or degrees if use_degrees is true). |
+| **topic** | `std::string` | ❌ | Name of the ROS 2 topic to publish to. |
+| **use_degrees** | `bool` | false | If true, interpret roll, pitch, yaw as degrees instead of radians. |
 | **x** | `double` | 0.000000 | Target x position in meters. |
 | **y** | `double` | 0.000000 | Target y position in meters. |
-| **z** | `double` | 0.000000 | Target z position in meters. |
-| **frame_id** | `std::string` | map | Frame ID for the pose. |
-| **roll** | `double` | 0.000000 | Target roll angle in radians (or degrees if use_degrees is true). |
-| **use_degrees** | `bool` | false | If true, interpret roll, pitch, yaw as degrees instead of radians. |
-| **pitch** | `double` | 0.000000 | Target pitch angle in radians (or degrees if use_degrees is true). |
 | **yaw** | `double` | 0.000000 | Target yaw angle in radians (or degrees if use_degrees is true). |
-| **topic** | `std::string` | ❌ | Name of the ROS 2 topic to publish to. |
+| **z** | `double` | 0.000000 | Target z position in meters. |
 
 ### PublishTwist
 
@@ -1193,13 +1208,13 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **linear_x** | `double` | 0.000000 | Linear velocity along x-axis in m/s. |
-| **linear_y** | `double` | 0.000000 | Linear velocity along y-axis in m/s. |
 | **angular_x** | `double` | 0.000000 | Angular velocity around x-axis in rad/s. |
-| **linear_z** | `double` | 0.000000 | Linear velocity along z-axis in m/s. |
-| **frame_id** | `std::string` | map | Frame ID for the twist. |
 | **angular_y** | `double` | 0.000000 | Angular velocity around y-axis in rad/s. |
 | **angular_z** | `double` | 0.000000 | Angular velocity around z-axis in rad/s. |
+| **frame_id** | `std::string` | map | Frame ID for the twist. |
+| **linear_x** | `double` | 0.000000 | Linear velocity along x-axis in m/s. |
+| **linear_y** | `double` | 0.000000 | Linear velocity along y-axis in m/s. |
+| **linear_z** | `double` | 0.000000 | Linear velocity along z-axis in m/s. |
 | **topic** | `std::string` | ❌ | Name of the ROS 2 topic to publish to. |
 
 ### ResumeExecutor
@@ -1271,9 +1286,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `BT::AnyTypeAllowed` | ❌ | Value of the parameter to be set. |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 
 ### SetParameterBool
 
@@ -1289,9 +1304,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `bool` | ❌ | Value of the parameter to be set. |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 
 ### SetParameterBoolVec
 
@@ -1307,9 +1322,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `std::vector<bool, std::allocator<bool> >` | ❌ | Value of the parameter to be set. |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 
 ### SetParameterByteVec
 
@@ -1325,9 +1340,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `std::vector<unsigned char, std::allocator<unsigned char> >` | ❌ | Value of the parameter to be set. |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 
 ### SetParameterDouble
 
@@ -1343,9 +1358,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `double` | ❌ | Value of the parameter to be set. |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 
 ### SetParameterDoubleVec
 
@@ -1361,9 +1376,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `std::vector<double, std::allocator<double> >` | ❌ | Value of the parameter to be set. |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 
 ### SetParameterInt
 
@@ -1379,9 +1394,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `int` | ❌ | Value of the parameter to be set. |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 
 ### SetParameterIntVec
 
@@ -1397,9 +1412,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `std::vector<int, std::allocator<int> >` | ❌ | Value of the parameter to be set. |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 
 ### SetParameterString
 
@@ -1415,9 +1430,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `std::string` | ❌ | Value of the parameter to be set. |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 
 ### SetParameterStringVec
 
@@ -1433,9 +1448,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Value of the parameter to be set. |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
 
 ### SetTrigger
 
@@ -1473,13 +1488,13 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **executor** | `std::string` | ❌ | Name of the executor responsible for building and running the specified behavior tree. |
-| **build_request** | `std::string` |  | String passed to the tree build handler defining which tree is to be built. |
-| **build_handler** | `std::string` |  | Fully qualified class name of the build handler that is supposed to take care of the request. If empty, use the current one. |
-| **node_manifest** | `std::string` |  | YAML/JSON formatted string encoding the name and the registration options for the tree nodes supposed to be loaded before building the tree. |
-| **entry_point** | `std::string` |  | Entry point for the behavior. If empty, let the build handler determine it automatically. |
-| **clear_blackboard** | `bool` | true | Boolean flag wether to clear the existing blackboard entries before the execution starts or not. |
 | **attach** | `bool` | true | Boolean flag wether to attach to the execution process or start in detached mode. |
+| **build_handler** | `std::string` |  | Fully qualified class name of the build handler that is supposed to take care of the request. If empty, use the current one. |
+| **build_request** | `std::string` |  | String passed to the tree build handler defining which tree is to be built. |
+| **clear_blackboard** | `bool` | true | Boolean flag wether to clear the existing blackboard entries before the execution starts or not. |
+| **entry_point** | `std::string` |  | Entry point for the behavior. If empty, let the build handler determine it automatically. |
+| **executor** | `std::string` | ❌ | Name of the executor responsible for building and running the specified behavior tree. |
+| **node_manifest** | `std::string` |  | YAML/JSON formatted string encoding the name and the registration options for the tree nodes supposed to be loaded before building the tree. |
 
 ### TerminateExecutor
 
