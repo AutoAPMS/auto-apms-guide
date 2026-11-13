@@ -72,6 +72,25 @@ ros2 behavior run -h  # Prints help information
 
 **This is the recommended way of executing behaviors from the command line** since it integrates very well with the other concepts introduced by AutoAPMS and looks the cleanest.
 
+## Passing Initial Values With the Entry Point
+
+The standard build handlers `TreeFromResourceBuildHandler` and `TreeFromStringBuildHandler` accept an entry point that looks like a function call:
+
+```txt
+TreeName(key1=value1,key2=value2)
+```
+
+The part before the parentheses selects the tree to execute. The key-value pairs are written to the blackboard of that tree before the execution starts, so the tree can read them as `{key1}` and `{key2}`. The parentheses may be omitted if you don't need any initial values. Values are stored as strings and converted when a node reads them through a port; therefore they must not contain commas.
+
+`auto_apms_examples` registers a tree that greets you by name if the entry `name` is set:
+
+```bash [Terminal]
+ros2 behavior run auto_apms_examples::demo::HelloWorldWithEntryPoint \
+  --entry-point "HelloWorldWithEntryPoint(name=AutoAPMS)"
+```
+
+Compared to `--blackboard`, which sets [global blackboard parameters](../concept/behavior-executor.md#global-blackboard) of the executor, the entry point keeps the values together with the behavior. This is useful when you register a behavior with fixed arguments using the `ENTRY_POINT` keyword of [`auto_apms_behavior_tree_register_behavior`](../reference/cmake.md#register-behavior).
+
 ## Spinning the Executor
 
 Users may also spawn the behavior tree executor as a persistent ROS 2 node. Compared to running a behavior using a "one-shot" CLI tool, spawning the executor node has the advantage that we can dynamically execute a behavior during runtime e.g. from other ROS 2 nodes. We provide an executable called `tree_executor` which spawns the executor and spins the ROS 2 node until the process is interrupted. You may run it in the terminal or a [ROS 2 launch file](https://docs.ros.org/en/jazzy/Tutorials/Intermediate/Launch/Creating-Launch-Files.html) like this:

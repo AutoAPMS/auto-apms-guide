@@ -91,6 +91,50 @@ This registers the behavior tree with the resource index and enables you to easi
 
 A behavior tree resource can also be used to [deploy the corresponding behavior](./deploying-behaviors.md) using the command line or a launch file.
 
+## Including Other Behavior Trees
+
+Behavior tree files can pull in trees from other files with an `<include>` element directly below `<root>`. This lets you reuse subtrees across packages instead of copying them. AutoAPMS supports three ways to locate the included trees:
+
+| Attribute(s) | Example | Includes |
+| :--- | :--- | :--- |
+| `autoapms` | `<include autoapms="my_package::common::GraspObject"/>` | The tree named by the [tree resource identity](../concept/common-resources.md#tree-identity) and all trees it uses as `<SubTree>`, but nothing else from that file |
+| `path` and `ros_pkg` | `<include path="behavior/common.xml" ros_pkg="my_package"/>` | All trees of the file, given relative to the package's share directory |
+| `path` | `<include path="/abs/path/common.xml"/>` | All trees of the file. Relative paths resolve against the current working directory, so prefer one of the other forms |
+
+The `autoapms` form is the most robust one: it needs no knowledge of install locations and only brings in what you actually use. A tree that several includes depend on is merged only once, and circular includes are detected.
+
+```xml [behavior/pick_and_place.xml]
+<root BTCPP_format="4" main_tree_to_execute="PickAndPlace">
+  <include autoapms="my_package::common::GraspObject"/>
+  <include autoapms="my_package::common::ReleaseObject"/>
+
+  <BehaviorTree ID="PickAndPlace">
+    <Sequence>
+      <SubTree ID="GraspObject"/>
+      <SubTree ID="ReleaseObject"/>
+    </Sequence>
+  </BehaviorTree>
+</root>
+```
+
+When you register a file that contains includes, the node manifests you pass to `auto_apms_behavior_tree_register_trees` must also cover the nodes used by the included trees. The [PX4 integration](../integration/px4.md#vehicle-command-nodes) ships a library of trees meant to be reused this way.
+
+## Embedding Node Registrations in the XML
+
+Usually, a behavior tree file only names its nodes, and a [node manifest](../concept/common-resources.md#behavior-tree-node-manifests) supplied separately tells the executor how to load them. Since version 1.7, a node element may carry its registration options itself. Each option becomes an attribute with the prefix `_autoapms_reg_opt__`:
+
+```xml
+<BehaviorTree ID="EnableArm">
+  <ActivateController _autoapms_reg_opt__class_name="auto_apms_ros2control::SwitchController"
+                      _autoapms_reg_opt__topic="(input:controller_manager)/switch_controller"
+                      activate_controllers="arm_controller"/>
+</BehaviorTree>
+```
+
+When such a tree is loaded, the executor registers the node from these attributes, so no node manifest is needed. The values are parsed as YAML, so options that hold lists or maps can be written inline as well. If a node with the same name is already registered with different options, loading fails instead of silently picking one of them.
+
+You rarely write these attributes by hand. `TreeDocument::setInlineRegistrationOptions()` adds them to all nodes of a document based on the currently registered node manifest. The result is a self-contained XML string that you can, for example, send to a running executor using `TreeFromStringBuildHandler`, store in a database, or generate with a planner or an editor on another machine. The receiving executor only needs the node plugins to be installed.
+
 ## Programmatic Approach
 
 You should build your behavior tree **programmatically** if
