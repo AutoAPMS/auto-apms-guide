@@ -37,6 +37,8 @@ AutoAPMS provides developers of real-time systems with the following key feature
 
 - `ros2 behavior` command extending the ROS2 CLI for behavior management
 
+- Ready-to-use integrations for [PX4 Autopilot](../integration/px4.md) and [ros2_control](../integration/ros2-control.md)
+
 - Comprehensive user guide and [API Docs](https://autoapms.github.io/auto-apms/)
 
 - Web-based behavior tree editor and deployment tool [AutoAPMS Studio](https://github.com/AutoAPMS/auto_apms_studio)

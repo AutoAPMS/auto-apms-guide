@@ -14,12 +14,14 @@ There's a [C++ node model class](../concept/common-resources.md#behavior-tree-no
 #include "auto_apms_behavior_tree/behavior_tree_nodes.hpp"
 namespace standard_node_models = auto_apms_behavior_tree::model;
 
-#include "auto_apms_simulation/behavior_tree_nodes.hpp"
-namespace simulation_node_models = auto_apms_simulation::model;
+#include "auto_apms_ros2control/behavior_tree_nodes.hpp"
+namespace ros2control_node_models = auto_apms_ros2control::model;
 
-#include "auto_apms_px4_behavior/behavior_tree_nodes.hpp"
-namespace px4_node_models = auto_apms_px4_behavior::model;
+#include "auto_apms_px4/behavior_tree_nodes.hpp"
+namespace px4_node_models = auto_apms_px4::model;
 ```
+
+How to use the nodes of `auto-apms-px4` and `auto_apms_ros2control` is explained on the integration pages for [PX4](../integration/px4.md) and [ros2_control](../integration/ros2-control.md).
 
 ## Overview `auto-apms`
 

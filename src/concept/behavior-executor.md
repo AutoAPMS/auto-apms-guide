@@ -9,9 +9,53 @@ Internally, the executor relies on behavior trees for task planning. Each reques
 
 The behavior executor is represented by the [`TreeExecutorNode`](https://autoapms.github.io/auto-apms/classauto__apms__behavior__tree_1_1TreeExecutorNode.html) class. This central ROS 2 node offers a universal interface for dynamically deploying behaviors at runtime.
 
+## Executor Classes
+
+`TreeExecutorNode` is the executor you get when you run `ros2 behavior run` or start the `tree_executor` executable. It is the most specialized class of a small hierarchy. Each level adds one feature, so you can build your own executor on the level that fits your application:
+
+| Class | Adds | Typical use |
+| :--- | :--- | :--- |
+| [`TreeExecutorBase`](https://autoapms.github.io/auto-apms/classauto__apms__behavior__tree_1_1TreeExecutorBase.html) | The execution routine: ticking a tree at a given rate, pausing, halting and terminating it | Executing a `BT::Tree` you created yourself |
+| [`GenericTreeExecutorNode`](https://autoapms.github.io/auto-apms/classauto__apms__behavior__tree_1_1GenericTreeExecutorNode.html) | Build handlers, the [`CommandTreeExecutor`](#commandtreeexecutor) action, [global blackboard](#global-blackboard) and [scripting enum](#scripting-enums) parameters, and the [configuration parameters](#configuration-parameters) | Executors that are started by your own code or by an event your node observes |
+| [`ActionBasedTreeExecutorNode<ActionT>`](https://autoapms.github.io/auto-apms/classauto__apms__behavior__tree_1_1ActionBasedTreeExecutorNode.html) | An action server of a type you choose, whose goals start the execution | Executors that are triggered by a domain-specific action, e.g. a `NavigateToPose` goal |
+| [`TreeExecutorNode`](https://autoapms.github.io/auto-apms/classauto__apms__behavior__tree_1_1TreeExecutorNode.html) | The standard [`StartTreeExecutor`](#starttreeexecutor) action | General-purpose deployment of behaviors |
+
+A derived class of `GenericTreeExecutorNode` starts a behavior by calling `startExecution` with a build request, or with a finished `BT::Tree` if it wants to build the tree ahead of time. Two virtual hooks let it adjust every tree the executor builds: `preBuild` is called before the build handler creates the tree (e.g. to register additional nodes or to fill the blackboard), and `postBuild` is called once the tree exists (e.g. to attach loggers). A derived class of `ActionBasedTreeExecutorNode` implements `getTreeConstructorFromGoal` to translate an action goal into a tree and may override `shouldAcceptGoal`, `onAcceptedGoal`, `onExecutionStarted` and `onGoalExecutionTermination`.
+
+### Executor Options
+
+The constructors accept a [`TreeExecutorNodeOptions`](https://autoapms.github.io/auto-apms/classauto__apms__behavior__tree_1_1TreeExecutorNodeOptions.html) object that enables or disables individual features:
+
+```cpp
+#include "auto_apms_behavior_tree/executor/generic_executor_node.hpp"
+
+using namespace auto_apms_behavior_tree;
+
+auto options = TreeExecutorNodeOptions(rclcpp::NodeOptions())
+  .enableCommandAction(false)                       // No CommandTreeExecutor action
+  .enableGlobalBlackboardParameters(true, false)    // bb.* parameters only at startup, not at runtime
+  .enableScriptingEnumParameters(true, false)       // enum.* parameters only at startup, not at runtime
+  .setDefaultBuildHandler("auto_apms_behavior_tree::TreeFromResourceBuildHandler");
+```
+
+The executor can also live inside a ROS 2 node that already exists, for example a node that has its own parameters and interfaces. Pass the node's shared pointer to the constructor instead of a name. By default, the executor removes all parameters it does not know when it starts, so that misspelled parameters do not go unnoticed. If the node declares its own parameters, disable this with `enableStrictUnkownParameterRemoval(false)`. The [PX4 behavior mode executor](../integration/px4.md#behavior-mode-executor) is built exactly this way: it combines a `GenericTreeExecutorNode` with a PX4 mode executor in one node.
+
+### Executor Components
+
+`auto_apms_behavior_tree` registers several preconfigured executors as [ROS 2 components](https://docs.ros.org/en/jazzy/Concepts/Intermediate/About-Composition.html). They differ only in which parameters they accept:
+
+| Component | Accepts |
+| :--- | :--- |
+| `auto_apms_behavior_tree::TreeExecutorNode` | Everything described on this page |
+| `auto_apms_behavior_tree::NoUndeclaredParamsExecutorNode` | No `bb.*` or `enum.*` parameters |
+| `auto_apms_behavior_tree::OnlyBlackboardParamsExecutorNode` | `bb.*` but no `enum.*` parameters |
+| `auto_apms_behavior_tree::OnlyScriptingEnumParamsExecutorNode` | `enum.*` but no `bb.*` parameters |
+| `auto_apms_behavior_tree::OnlyInitialBlackboardParamsExecutorNode` | `bb.*` parameters at startup only |
+| `auto_apms_behavior_tree::OnlyInitialScriptingEnumParamsExecutorNode` | `enum.*` parameters at startup only |
+
 ## ROS 2 Interfaces
 
-There are two ROS 2 actions allowing the user to communicate with an executor node. They may also be used with custom executors created by inheriting from `TreeExecutorNode`.
+`TreeExecutorNode` offers two ROS 2 actions and a service for communicating with it. Custom executors offer the same interfaces, depending on the class they derive from and the [executor options](#executor-options).
 
 ### StartTreeExecutor
 
@@ -36,10 +80,10 @@ Only a single `StartTreeExecutor` goal is allowed to be executed at a time.
 | :---: | :---: | :---: | :--- |
 | **build_request** | `std::string` | ❌ | String that encodes information about which behavior tree to execute. It must be formatted in a suitable way so that the underlying build handler is able to interpret it correctly. The user must be aware of which format is accepted by which build handler and always create appropriate requests. Otherwise, the build handler may throw an error and the action goal will be rejected. If the build handler doesn't implement that level of validation, it's undefined behavior. |
 | **build_handler** | `std::string` | "" | Fully qualified class name of a registered behavior build handler plugin to be used for interpreting `build_request`. If empty, the one that is currently loaded by the executor will be used. May also be `none` for requesting to "unload" the current build handler (This requires derived executors to be able to build the behavior tree without relying on a build handler). |
-| **entry_point** | `std::string` | "" | Single point of entry for execution. This field may be empty if the underlying build handler is able to determine the entry point only through `build_request`. Otherwise, the build handler may use this information appropriately when it is passed to `TreeBuildHandler::setBuildRequest`. |
+| **entry_point** | `std::string` | "" | Single point of entry for execution. This field may be empty if the underlying build handler is able to determine the entry point only through `build_request`. Otherwise, the build handler may use this information appropriately when it is passed to `TreeBuildHandler::setBuildRequest`. The standard build handlers accept a tree name together with [initial blackboard values](../tutorial/deploying-behaviors.md#passing-initial-values-with-the-entry-point). |
 | **node_manifest** | `std::string` | "" | User-defined node manifest (encoded) specifying how to register all of the behavior tree nodes required by `build_request`. This field may be empty if the underlying build handler is able to independently perform the node registration. Otherwise, the build handler may use this information appropriately when it is passed to `TreeBuildHandler::setBuildRequest`. |
 | **attach** | `bool` | `true` | Flag for determining the execution mode. If `true` (attached mode), the action will attach to the execution routine, run for as long as it is alive and return a goal result encapsulating the final status of the executed behavior tree. If `false`, the action will return immediately after the execution has been started allowing the client to do work asynchronously while the behavior tree is being executed. |
-| **clear_blackboard** | `bool` | `true` | Flag for determining whether to clear the executor's global behavior tree blackboard before starting the execution or not. If `true` |
+| **clear_blackboard** | `bool` | `true` | Flag for determining whether to clear the executor's global behavior tree blackboard before starting the execution or not. If `true`, all entries from previous executions are removed. Set it to `false` to hand values over from one behavior to the next. |
 
 ### CommandTreeExecutor
 
@@ -77,6 +121,14 @@ The possible enumeration are defined as constants in the action interface defini
 | `COMMAND_PAUSE` | 2 | Pause the execution. This keeps the executor busy but prevents the behavior tree from being ticked again after this command was accepted. |
 | `COMMAND_HALT` | 3 | Halt the behavior tree. This causes the execution routine to invoke `BT::Tree::haltTree` which stops the currently running behavior tree node. Afterwards, the executor is kept busy and the tree won't be ticked until `COMMAND_RESUME` is received. |
 | `COMMAND_TERMINATE` | 4 | Halt the behavior tree and terminate the execution routine. If accepted, the executor invokes `BT::Tree::haltTree` and ultimately resets the execution routine. This enables the executor to accept new [`StartTreeExecutor`](#starttreeexecutor) goals. |
+
+### Clearing the Blackboard
+
+**Service Name:** `<node_name>/clear_blackboard`
+
+**C++ Type:** `std_srvs::srv::Trigger`
+
+Removes all entries from the executor's [global blackboard](#global-blackboard) and the corresponding `bb.*` parameters. The request is rejected unless the executor is idle. `ros2 behavior send --clear-blackboard` uses this service.
 
 ## Behavior Build Handler
 

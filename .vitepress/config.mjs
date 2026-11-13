@@ -11,11 +11,12 @@ const vitePressSidebarOptions = {
     useTitleFromFrontmatter: true,
     collapseDepth: 2,
     sortMenusByFrontmatterOrder: true,
-    manualSortFileNameByPriority: ['introduction', 'concept', 'tutorial', 'reference'],
+    manualSortFileNameByPriority: ['introduction', 'concept', 'integration', 'tutorial', 'reference'],
+    excludeFilesByFrontmatterFieldName: 'exclude',
     frontmatterTitleFieldName: 'sidebar',
     capitalizeFirst: false,
     hyphenToSpace: true,
-    excludePattern: ['create_node_reference_markdown_output.md', 'create_node_reference_markdown_output_px4.md']
+    excludePattern: ['create_node_reference_markdown_output*.md']
 }
 
 const vitePressOptions = {
@@ -62,7 +63,7 @@ const vitePressOptions = {
     ],
 
     srcDir: 'src',
-    srcExclude: ['**/readme.md', '**/README.md', '**/TODO.md', '**/create_node_reference_markdown_output.md', '**/create_node_reference_markdown_output_px4.md'],
+    srcExclude: ['**/readme.md', '**/README.md', '**/TODO.md', '**/create_node_reference_markdown_output*.md'],
 
     cleanUrls: true,
 

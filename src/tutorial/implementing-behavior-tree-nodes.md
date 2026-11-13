@@ -14,7 +14,16 @@ For functionality that is directly associated with custom skills, you must imple
 - [`RosPublisherNode`](https://autoapms.github.io/auto-apms/classauto__apms__behavior__tree_1_1core_1_1RosPublisherNode.html) - Client node for a ROS 2 publisher
 - [`RosSubscriberNode`](https://autoapms.github.io/auto-apms/classauto__apms__behavior__tree_1_1core_1_1RosSubscriberNode.html) - Client node for a ROS 2 subscriber
 
-If you want to write nodes that are not related to any of the above mentioned ROS 2 interfaces, you should inherit from lower level classes maintained by BehaviorTree.CPP:
+If your node needs the ROS 2 node (e.g. its clock, parameters or logger) but doesn't fit one of the communication patterns above, inherit from one of the general ROS-aware base classes. They wrap the basic node types of BehaviorTree.CPP and give you the same `RosNodeContext`, logger and node manifest support as the classes above:
+
+- `RosActionNodeBase` - Asynchronous action node that implements its own `tick()` and `halt()`, e.g. to publish a command and then wait for an acknowledgement
+- `RosConditionNode` - Condition node
+- `RosDecoratorNode` - Decorator node with exactly one child
+- `RosControlNode` - Control node with one or more children, e.g. to select a child based on some ROS 2 state
+
+All of them are available through `#include "auto_apms_behavior_tree_core/node.hpp"` in the namespace `auto_apms_behavior_tree::core`. Through `getSharedEntity()`, nodes can share ROS 2 entities such as a subscription between node instances instead of creating one per instance.
+
+If your node doesn't need ROS 2 at all, you may also inherit from the lower level classes maintained by BehaviorTree.CPP directly:
 
 - [BT action node](https://github.com/BehaviorTree/BehaviorTree.CPP/blob/master/include/behaviortree_cpp/action_node.h)
 - [BT condition node](https://github.com/BehaviorTree/BehaviorTree.CPP/blob/master/include/behaviortree_cpp/condition_node.h)
