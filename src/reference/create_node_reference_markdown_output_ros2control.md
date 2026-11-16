@@ -34,9 +34,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **strictness** | `std::string` | STRICT | Switching behavior on error. One of: BEST_EFFORT, STRICT, AUTO, FORCE_AUTO. |
 | **activate_controllers** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` |  | ';'-separated names of the controllers to activate. |
 | **controller_manager** | `std::string` | controller_manager | Name of the targeted controller manager. |
+| **strictness** | `std::string` | STRICT | Switching behavior on error. One of: BEST_EFFORT, STRICT, AUTO, FORCE_AUTO. |
 
 #### Output Ports
 
@@ -58,9 +58,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **state** | `std::string` |  | Expected state of the controller (e.g. active, inactive, unconfigured). If empty, only the existence of the controller is checked. |
 | **controller** | `std::string` | ❌ | Name of the controller to check. |
 | **controller_manager** | `std::string` | controller_manager | Name of the targeted controller manager. |
+| **state** | `std::string` |  | Expected state of the controller (e.g. active, inactive, unconfigured). If empty, only the existence of the controller is checked. |
 
 #### Output Ports
 
@@ -82,9 +82,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **state** | `std::string` |  | Expected lifecycle state of the hardware component (e.g. active, inactive, unconfigured, finalized). If empty, only the existence of the component is checked. |
-| **hardware** | `std::string` | ❌ | Name of the hardware component to check. |
 | **controller_manager** | `std::string` | controller_manager | Name of the targeted controller manager. |
+| **hardware** | `std::string` | ❌ | Name of the hardware component to check. |
+| **state** | `std::string` |  | Expected lifecycle state of the hardware component (e.g. active, inactive, unconfigured, finalized). If empty, only the existence of the component is checked. |
 
 #### Output Ports
 
@@ -106,11 +106,11 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **timeout** | `double` | 0.500000 | Age [s] of the most recent introspection message above which the check fails. |
-| **min** | `double` | -inf | Smallest value that passes the check. |
-| **max** | `double` | inf | Largest value that passes the check. |
-| **interface** | `std::string` | ❌ | Name of the interface as published by the introspection of the controller manager, e.g. 'state_interface.joint1/position'. |
 | **controller_manager** | `std::string` | controller_manager | Name of the targeted controller manager. |
+| **interface** | `std::string` | ❌ | Name of the interface as published by the introspection of the controller manager, e.g. 'state_interface.joint1/position'. |
+| **max** | `double` | inf | Largest value that passes the check. |
+| **min** | `double` | -inf | Smallest value that passes the check. |
+| **timeout** | `double` | 0.500000 | Age [s] of the most recent introspection message above which the check fails. |
 
 #### Output Ports
 
@@ -166,9 +166,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **strictness** | `std::string` | STRICT | Switching behavior on error. One of: BEST_EFFORT, STRICT, AUTO, FORCE_AUTO. |
-| **deactivate_controllers** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` |  | ';'-separated names of the controllers to deactivate. |
 | **controller_manager** | `std::string` | controller_manager | Name of the targeted controller manager. |
+| **deactivate_controllers** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` |  | ';'-separated names of the controllers to deactivate. |
+| **strictness** | `std::string` | STRICT | Switching behavior on error. One of: BEST_EFFORT, STRICT, AUTO, FORCE_AUTO. |
 
 #### Output Ports
 
@@ -219,9 +219,9 @@
 
 | Output Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **inactive_controllers** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all inactive controllers. |
 | **active_controllers** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all active controllers. |
 | **controllers** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all loaded controllers. |
+| **inactive_controllers** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all inactive controllers. |
 
 ### ListHardwareComponents
 
@@ -243,9 +243,9 @@
 
 | Output Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **inactive_components** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all inactive hardware components. |
 | **active_components** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all active hardware components. |
 | **components** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all loaded hardware components. |
+| **inactive_components** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all inactive hardware components. |
 
 ### ListHardwareInterfaces
 
@@ -267,10 +267,10 @@
 
 | Output Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **claimed_command_interfaces** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all currently claimed command interfaces. |
 | **available_command_interfaces** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all currently available command interfaces. |
-| **state_interfaces** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all state interfaces. |
+| **claimed_command_interfaces** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all currently claimed command interfaces. |
 | **command_interfaces** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all command interfaces. |
+| **state_interfaces** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Names of all state interfaces. |
 
 ### LoadController
 
@@ -303,8 +303,8 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **force_kill** | `bool` | false | Unload all loaded controllers before reloading the libraries. |
 | **controller_manager** | `std::string` | controller_manager | Name of the targeted controller manager. |
+| **force_kill** | `bool` | false | Unload all loaded controllers before reloading the libraries. |
 
 ### SetHardwareComponentState
 
@@ -320,9 +320,9 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **target_state** | `std::string` | ❌ | Target lifecycle state. One of: unconfigured, inactive, active, finalized. |
 | **component** | `std::string` | ❌ | Name of the targeted hardware component. |
 | **controller_manager** | `std::string` | controller_manager | Name of the targeted controller manager. |
+| **target_state** | `std::string` | ❌ | Target lifecycle state. One of: unconfigured, inactive, active, finalized. |
 
 #### Output Ports
 
@@ -344,12 +344,12 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **timeout** | `double` | 0.000000 | Timeout [s] before aborting pending controllers (0 = infinite). |
 | **activate_asap** | `bool` | false | Activate the controllers as soon as their hardware dependencies are ready instead of waiting for all interfaces to become available. |
-| **strictness** | `std::string` | STRICT | Switching behavior on error. One of: BEST_EFFORT, STRICT, AUTO, FORCE_AUTO. |
-| **deactivate_controllers** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` |  | ';'-separated names of the controllers to deactivate. |
 | **activate_controllers** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` |  | ';'-separated names of the controllers to activate. |
 | **controller_manager** | `std::string` | controller_manager | Name of the targeted controller manager. |
+| **deactivate_controllers** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` |  | ';'-separated names of the controllers to deactivate. |
+| **strictness** | `std::string` | STRICT | Switching behavior on error. One of: BEST_EFFORT, STRICT, AUTO, FORCE_AUTO. |
+| **timeout** | `double` | 0.000000 | Timeout [s] before aborting pending controllers (0 = infinite). |
 
 #### Output Ports
 
