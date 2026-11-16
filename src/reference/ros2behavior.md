@@ -123,6 +123,8 @@ ros2 behavior run [behavior] [options]
 | `--groot2-port <int>` | Port for Groot2 visualization (disabled by default). |
 | `--state-change-logger` | Enable the state change logger (flag). |
 | `--logging <level>` | Set logger level (debug, info, warn, error, fatal). |
+| `-n`, `--namespace <string>` | ROS 2 namespace of the executor node. Relative names used by the behavior, e.g. topics and action servers, resolve against it. |
+| `--node-name <string>` | Name of the executor node (default: `run_behavior`). |
 
 **Examples:**
 
@@ -135,6 +137,9 @@ ros2 behavior run navigation::explore --blackboard target_x:=10.0 target_y:=5.0
 
 # Run a dynamic request without predefined behavior
 ros2 behavior run --build-request "custom_request" --build-handler custom_namespace::CustomBuildHandler
+
+# Run the same behavior for a second robot
+ros2 behavior run navigation::explore --namespace robot2 --node-name explore_executor
 ```
 
 ---
@@ -146,13 +151,13 @@ Send a behavior tree to a running executor and start execution.
 **Usage:**
 
 ```bash
-ros2 behavior send <executor_name> [behavior] [options]
+ros2 behavior send <action_name> [behavior] [options]
 ```
 
 **Arguments:**
 
-- `executor_name` - Name of the behavior tree executor to send the tree to
-- `behavior` - Identity string of the behavior resource to execute
+- `action_name` - Name of the `StartTreeExecutor` action to send the behavior to, e.g. `/my_executor/start`. Tab completion lists all such actions that are currently available.
+- `behavior` - Identity string of the behavior resource to execute (optional)
 
 **Options:**
 
@@ -162,6 +167,7 @@ ros2 behavior send <executor_name> [behavior] [options]
 | `--build-handler <namespace>::<class_name>` | Build handler to load (overrides build handler associated with `behavior` if given). |
 | `--entry-point <string>` | Entry point to pass to the build handler (overrides entry point associated with `behavior` if given). |
 | `--node-manifest <string>` | Node manifest resource to pass to the build handler (overrides node manifest associated with `behavior` if given). |
+| `-e`, `--executor <string>` | Name of the executor node. The command uses it to apply `--blackboard`, `--tick-rate`, `--groot2-port`, `--state-change-logger` and `--logging` as parameters of that node before sending the goal. If omitted, the name is guessed from `action_name`. Pass an empty string to skip this step, e.g. for executors that don't offer these parameters. |
 | `--blackboard [key:=value ...]` | Blackboard variables to pass to the behavior tree. |
 | `--clear-blackboard` | Explicitly clean the blackboard before execution (flag). |
 | `--tick-rate <float>` | Tick rate for the behavior tree in seconds (keeps current if omitted). |
@@ -173,13 +179,16 @@ ros2 behavior send <executor_name> [behavior] [options]
 
 ```bash
 # Send behavior to executor
-ros2 behavior send my_executor navigation::explore
+ros2 behavior send /my_executor/start navigation::explore
 
 # Send with blackboard variables
-ros2 behavior send my_executor navigation::explore --blackboard target_x:=10.0 target_y:=5.0
+ros2 behavior send /my_executor/start navigation::explore --blackboard target_x:=10.0 target_y:=5.0
 
 # Send a dynamic request without predefined behavior
-ros2 behavior send my_executor --build-request "custom_request" --build-handler custom_namespace::CustomBuildHandler
+ros2 behavior send /my_executor/start --build-request "custom_request" --build-handler custom_namespace::CustomBuildHandler
+
+# Send to a custom executor whose node offers none of the standard parameters
+ros2 behavior send /my_robot/run_mission navigation::explore --executor ""
 ```
 
 ---
@@ -314,6 +323,7 @@ ros2 behavior node call <manifest> <node_name> [port_values...] [options]
 | Option | Description |
 |---|---|
 | `--logging <level>` | Set logger level for the executor node. |
+| `-n`, `--namespace <string>` | ROS 2 namespace of the executor node, e.g. to reach the topics and services of a namespaced robot. |
 
 **Examples:**
 
