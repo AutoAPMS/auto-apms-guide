@@ -81,8 +81,8 @@
 | Output Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
 | **alt** | `double` | {alt} | Current altitude in meter (AMSL) |
-| **lon** | `double` | {lon} | Current longitude in degree [°] |
 | **lat** | `double` | {lat} | Current latitude in degree [°] |
+| **lon** | `double` | {lon} | Current longitude in degree [°] |
 | **vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | {pos_vec} | Current global position vector (latitude [°], longitude [°], altitude AMSL [m]) |
 
 ### GetLocalPosition
@@ -140,18 +140,18 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **reached_thresh_yaw** | `float` | 7.000000 | Maximum heading error [°] under which the position is considered reached |
-| **reached_thresh_vel** | `float` | 0.300000 | Maximum velocity error [m/s] under which the position is considered reached |
-| **reached_thresh_pos** | `float` | 0.500000 | Maximum position error [m] under which the position is considered reached |
+| **frame** | `std::string` | global | Reference frame: 'global' (Latitude, longitude, altitude (AMSL)) or 'local' (North, east, down from start) |
 | **max_heading_rate** | `float` | 30.000000 | Maximum heading rate [°/s] |
-| **max_vertical_vel** | `float` | 5.000000 | Maximum vertical velocity [m/s] |
 | **max_horizontal_vel** | `float` | 10.000000 | Maximum horizontal velocity [m/s] |
+| **max_vertical_vel** | `float` | 5.000000 | Maximum vertical velocity [m/s] |
+| **reached_thresh_pos** | `float` | 0.500000 | Maximum position error [m] under which the position is considered reached |
+| **reached_thresh_vel** | `float` | 0.300000 | Maximum velocity error [m/s] under which the position is considered reached |
+| **reached_thresh_yaw** | `float` | 7.000000 | Maximum heading error [°] under which the position is considered reached |
+| **vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | ❌ | Target position as a row vector (separated by ';') |
+| **x** | `float` | ❌ | Override vector entry X |
+| **y** | `float` | ❌ | Override vector entry Y |
 | **yaw** | `float` | ❌ | Desired yaw position in degree from north (heading) [-180°, 180) |
 | **z** | `float` | ❌ | Override vector entry Z |
-| **y** | `float` | ❌ | Override vector entry Y |
-| **x** | `float` | ❌ | Override vector entry X |
-| **vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | ❌ | Target position as a row vector (separated by ';') |
-| **frame** | `std::string` | global | Reference frame: 'global' (Latitude, longitude, altitude (AMSL)) or 'local' (North, east, down from start) |
 
 ### GoToGlobal
 
@@ -167,18 +167,18 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **reached_thresh_yaw** | `float` | 7.000000 | Maximum heading error [°] under which the position is considered reached |
-| **reached_thresh_vel** | `float` | 0.300000 | Maximum velocity error [m/s] under which the position is considered reached |
-| **reached_thresh_pos** | `float` | 0.500000 | Maximum position error [m] under which the position is considered reached |
+| **frame** | `std::string` | global | Reference frame: 'global' (Latitude, longitude, altitude (AMSL)) or 'local' (North, east, down from start) |
 | **max_heading_rate** | `float` | 30.000000 | Maximum heading rate [°/s] |
-| **max_vertical_vel** | `float` | 5.000000 | Maximum vertical velocity [m/s] |
 | **max_horizontal_vel** | `float` | 10.000000 | Maximum horizontal velocity [m/s] |
+| **max_vertical_vel** | `float` | 5.000000 | Maximum vertical velocity [m/s] |
+| **reached_thresh_pos** | `float` | 0.500000 | Maximum position error [m] under which the position is considered reached |
+| **reached_thresh_vel** | `float` | 0.300000 | Maximum velocity error [m/s] under which the position is considered reached |
+| **reached_thresh_yaw** | `float` | 7.000000 | Maximum heading error [°] under which the position is considered reached |
+| **vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | ❌ | Target position as a row vector (separated by ';') |
+| **x** | `float` | ❌ | Override vector entry X |
+| **y** | `float` | ❌ | Override vector entry Y |
 | **yaw** | `float` | ❌ | Desired yaw position in degree from north (heading) [-180°, 180) |
 | **z** | `float` | ❌ | Override vector entry Z |
-| **y** | `float` | ❌ | Override vector entry Y |
-| **x** | `float` | ❌ | Override vector entry X |
-| **vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | ❌ | Target position as a row vector (separated by ';') |
-| **frame** | `std::string` | global | Reference frame: 'global' (Latitude, longitude, altitude (AMSL)) or 'local' (North, east, down from start) |
 
 ### GoToLocal
 
@@ -194,18 +194,18 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **reached_thresh_yaw** | `float` | 7.000000 | Maximum heading error [°] under which the position is considered reached |
-| **reached_thresh_vel** | `float` | 0.300000 | Maximum velocity error [m/s] under which the position is considered reached |
-| **reached_thresh_pos** | `float` | 0.500000 | Maximum position error [m] under which the position is considered reached |
+| **frame** | `std::string` | local | Reference frame: 'global' (Latitude, longitude, altitude (AMSL)) or 'local' (North, east, down from start) |
 | **max_heading_rate** | `float` | 30.000000 | Maximum heading rate [°/s] |
-| **max_vertical_vel** | `float` | 5.000000 | Maximum vertical velocity [m/s] |
 | **max_horizontal_vel** | `float` | 10.000000 | Maximum horizontal velocity [m/s] |
+| **max_vertical_vel** | `float` | 5.000000 | Maximum vertical velocity [m/s] |
+| **reached_thresh_pos** | `float` | 0.500000 | Maximum position error [m] under which the position is considered reached |
+| **reached_thresh_vel** | `float` | 0.300000 | Maximum velocity error [m/s] under which the position is considered reached |
+| **reached_thresh_yaw** | `float` | 7.000000 | Maximum heading error [°] under which the position is considered reached |
+| **vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | ❌ | Target position as a row vector (separated by ';') |
+| **x** | `float` | ❌ | Override vector entry X |
+| **y** | `float` | ❌ | Override vector entry Y |
 | **yaw** | `float` | ❌ | Desired yaw position in degree from north (heading) [-180°, 180) |
 | **z** | `float` | ❌ | Override vector entry Z |
-| **y** | `float` | ❌ | Override vector entry Y |
-| **x** | `float` | ❌ | Override vector entry X |
-| **vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | ❌ | Target position as a row vector (separated by ';') |
-| **frame** | `std::string` | local | Reference frame: 'global' (Latitude, longitude, altitude (AMSL)) or 'local' (North, east, down from start) |
 
 ### OffsetGlobalPosition
 
@@ -221,21 +221,21 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **north** | `double` | 0.000000 | Offset towards north [m] |
-| **east** | `double` | 0.000000 | Offset towards east [m] |
 | **alt** | `double` | {alt} | Altitude [m] (AMSL) of the position to offset |
 | **down** | `double` | 0.000000 | Offset downwards [m] (negative to go up) |
-| **lon** | `double` | {lon} | Longitude [°] of the position to offset |
+| **east** | `double` | 0.000000 | Offset towards east [m] |
 | **lat** | `double` | {lat} | Latitude [°] of the position to offset |
+| **lon** | `double` | {lon} | Longitude [°] of the position to offset |
+| **north** | `double` | 0.000000 | Offset towards north [m] |
 
 #### Output Ports
 
 | Output Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **target_vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | {target_vec} | Resulting global position vector (latitude [°], longitude [°], altitude AMSL [m]) |
 | **target_alt** | `double` | {target_alt} | Resulting altitude [m] (AMSL) |
-| **target_lon** | `double` | {target_lon} | Resulting longitude [°] |
 | **target_lat** | `double` | {target_lat} | Resulting latitude [°] |
+| **target_lon** | `double` | {target_lon} | Resulting longitude [°] |
+| **target_vector** | `Eigen::Matrix<double, -1, -1, 0, -1, -1>` | {target_vec} | Resulting global position vector (latitude [°], longitude [°], altitude AMSL [m]) |
 
 ### SendCmdDoReposition
 
@@ -251,11 +251,11 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **ground_speed** | `double` | -1.000000 | Ground speed [m/s]. Negative selects the PX4 default. |
-| **yaw** | `double` | ❌ | Desired yaw [°] clockwise from north. Leave empty to keep the current heading mode. |
 | **altitude** | `double` | ❌ | Target altitude [m] (AMSL). |
-| **longitude** | `double` | ❌ | Target longitude [°] (WGS84). |
+| **ground_speed** | `double` | -1.000000 | Ground speed [m/s]. Negative selects the PX4 default. |
 | **latitude** | `double` | ❌ | Target latitude [°] (WGS84). |
+| **longitude** | `double` | ❌ | Target longitude [°] (WGS84). |
+| **yaw** | `double` | ❌ | Desired yaw [°] clockwise from north. Leave empty to keep the current heading mode. |
 
 ### SendCmdSetNavState
 
@@ -287,17 +287,17 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
+| **command** | `int` | ❌ | VehicleCommand command id (see px4_msgs/msg/VehicleCommand). |
+| **confirmation** | `int` | 0 | Confirmation count (0 = first transmission of this command). |
+| **param1** | `double` | 0.000000 | Command parameter 1. |
+| **param2** | `double` | 0.000000 | Command parameter 2. |
+| **param3** | `double` | 0.000000 | Command parameter 3. |
+| **param4** | `double` | 0.000000 | Command parameter 4. |
+| **param5** | `double` | 0.000000 | Command parameter 5. |
+| **param6** | `double` | 0.000000 | Command parameter 6. |
+| **param7** | `double` | 0.000000 | Command parameter 7. |
 | **target_component** | `int` | 0 | Component that should execute the command (0 = all). |
 | **target_system** | `int` | 0 | System that should execute the command. |
-| **confirmation** | `int` | 0 | Confirmation count (0 = first transmission of this command). |
-| **param7** | `double` | 0.000000 | Command parameter 7. |
-| **param6** | `double` | 0.000000 | Command parameter 6. |
-| **param5** | `double` | 0.000000 | Command parameter 5. |
-| **param4** | `double` | 0.000000 | Command parameter 4. |
-| **param3** | `double` | 0.000000 | Command parameter 3. |
-| **param2** | `double` | 0.000000 | Command parameter 2. |
-| **param1** | `double` | 0.000000 | Command parameter 1. |
-| **command** | `int` | ❌ | VehicleCommand command id (see px4_msgs/msg/VehicleCommand). |
 
 ### SetActuators
 
@@ -314,5 +314,5 @@
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
 | **hold_period_ms** | `unsigned int` | 0 | Hold the commands for this duration [ms] before stopping. 0 = send once then stop immediately |
-| **servo_commands** | `std::vector<float, std::allocator<float> >` | ❌ | Servo commands as a semicolon-separated list. Range: [-1, 1], 'nan'\|'NaN'\|'NAN' = disarmed |
 | **motor_commands** | `std::vector<float, std::allocator<float> >` | ❌ | Motor commands as a semicolon-separated list. Range: [-1, 1], 'nan'\|'NaN'\|'NAN' = disarmed |
+| **servo_commands** | `std::vector<float, std::allocator<float> >` | ❌ | Servo commands as a semicolon-separated list. Range: [-1, 1], 'nan'\|'NaN'\|'NAN' = disarmed |
