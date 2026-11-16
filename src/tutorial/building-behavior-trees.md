@@ -24,7 +24,13 @@ You should build your behavior tree **graphically** if
 - the application you're designing is not that complex or
 - you prioritize visual comprehensibility over complicated C++ source code.
 
-The visual editor we recommend is called [Groot2](https://www.behaviortree.dev/groot) and designed by the same person who maintains the BehaviorTree.CPP library AutoAPMS builds upon.
+Two visual editors work well with AutoAPMS: AutoAPMS Studio, which is made for AutoAPMS, and [Groot2](https://www.behaviortree.dev/groot), which is designed by the same person who maintains the BehaviorTree.CPP library AutoAPMS builds upon.
+
+### Using AutoAPMS Studio
+
+[AutoAPMS Studio](https://autoapms.github.io/auto_apms_studio/docs/) is a web-based behavior tree editor built for AutoAPMS. Installed as a ROS 2 package, it loads the node models of your AutoAPMS installation automatically, including your custom nodes, so you don't have to import them by hand. Trees are stored in the standard BehaviorTree.CPP XML format, and you can deploy them to your robot directly from the editor. The editor also works offline with the node models it loaded last.
+
+Try it without installing anything in the [live demo](https://autoapms.github.io/auto_apms_studio/), and visit the [AutoAPMS Studio documentation](https://autoapms.github.io/auto_apms_studio/docs/) for installation instructions and a getting started guide.
 
 ### Using Groot2
 
