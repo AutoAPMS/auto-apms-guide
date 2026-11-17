@@ -784,7 +784,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
@@ -807,7 +807,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
@@ -830,7 +830,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
@@ -853,7 +853,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
@@ -876,7 +876,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
@@ -899,7 +899,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
@@ -922,7 +922,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
@@ -945,7 +945,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
@@ -968,7 +968,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
@@ -991,7 +991,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to get. |
 
 #### Output Ports
@@ -1030,7 +1030,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter. |
 
 ### LifecycleActivate
@@ -1286,7 +1286,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `BT::AnyTypeAllowed` | ❌ | Value of the parameter to be set. |
 
@@ -1304,7 +1304,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `bool` | ❌ | Value of the parameter to be set. |
 
@@ -1322,7 +1322,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `std::vector<bool, std::allocator<bool> >` | ❌ | Value of the parameter to be set. |
 
@@ -1340,7 +1340,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `std::vector<unsigned char, std::allocator<unsigned char> >` | ❌ | Value of the parameter to be set. |
 
@@ -1358,7 +1358,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `double` | ❌ | Value of the parameter to be set. |
 
@@ -1376,7 +1376,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `std::vector<double, std::allocator<double> >` | ❌ | Value of the parameter to be set. |
 
@@ -1394,7 +1394,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `int` | ❌ | Value of the parameter to be set. |
 
@@ -1412,7 +1412,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `std::vector<int, std::allocator<int> >` | ❌ | Value of the parameter to be set. |
 
@@ -1430,7 +1430,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `std::string` | ❌ | Value of the parameter to be set. |
 
@@ -1448,7 +1448,7 @@
 
 | Input Name | Type | Default Value | Description |
 | :--- | :---: | :---: | :--- |
-| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node. Leave empty to target this executor's node. |
+| **node** | `std::string` | ❌ | Name of the targeted ROS 2 node (a blackboard entry must be set before the tree is created). Leave empty to target this executor's node. |
 | **parameter** | `std::string` | ❌ | Name of the parameter to be set. |
 | **value** | `std::vector<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, std::allocator<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > > >` | ❌ | Value of the parameter to be set. |
 
